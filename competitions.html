@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="南京邮电大学大学生创新创业竞赛项目认定及分类目录（2025 年修订）。" />
+    <title>官方竞赛目录 · 邮见南邮</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="styles.css?v=13" />
+  </head>
+  <body data-page="competitions">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="返回首页"><span class="brand-mark">邮</span><span><strong>邮见南邮</strong><small>新生校园指南</small></span></a>
+      <nav class="main-nav" aria-label="主要导航">
+        <a href="map.html" data-nav="map"><i data-lucide="map"></i><span>我走过的南邮</span></a>
+        <a href="clubs.html" data-nav="clubs"><i data-lucide="users"></i><span>我遇见的南邮</span></a>
+        <a href="competitions.html" data-nav="competitions"><i data-lucide="trophy"></i><span>我挑战的南邮</span></a>
+        <a href="schedule.html" data-nav="schedule"><i data-lucide="clock-3"></i><span>我生活的南邮</span></a>
+        <a href="dorms.html" data-nav="dorms"><i data-lucide="bed-double"></i><span>我住下的南邮</span></a>
+        <a href="gallery.html" data-nav="gallery"><i data-lucide="images"></i><span>我见过的南邮</span></a>
+        <a href="food.html" data-nav="food"><i data-lucide="utensils"></i><span>我品过的南邮</span></a>
+      </nav>
+    </header>
+    <main>
+      <section class="module-hero"><div><p class="section-index">03 / COMPETITIONS</p><h1>官方竞赛目录</h1></div><p>依据校教发〔2025〕1 号文件整理，共收录 92 个认定项目。</p></section>
+      <section class="page-section competition-page" aria-label="官方竞赛目录">
+        <div class="catalog-stats" aria-label="竞赛项目统计">
+          <div><strong>92</strong><span>全部项目</span></div>
+          <div><strong>5</strong><span>A 类</span></div>
+          <div><strong>21</strong><span>B 类</span></div>
+          <div><strong>1</strong><span>B/C 类</span></div>
+          <div><strong>61</strong><span>C 类</span></div>
+          <div><strong>4</strong><span>C2 类</span></div>
+        </div>
+
+        <div class="competition-tools">
+          <label class="search-box"><i data-lucide="search"></i><span class="sr-only">搜索竞赛</span><input id="competition-search" type="search" placeholder="搜索竞赛名称或负责部门" autocomplete="off" /><kbd id="competition-count">92</kbd></label>
+          <label class="select-box"><span class="sr-only">按负责部门筛选</span><select id="competition-department"><option value="all">全部负责部门</option></select><i data-lucide="chevron-down"></i></label>
+        </div>
+        <div class="segmented-filter" id="competition-level-filter" aria-label="按认定类别筛选"></div>
+
+        <div class="catalog-header" aria-hidden="true"><span>序号</span><span>竞赛名称</span><span>认定</span><span>负责部门</span></div>
+        <div class="competition-catalog" id="competition-catalog" aria-live="polite"></div>
+        <div class="list-footer"><p id="competition-summary"></p><button class="secondary-button" id="load-more-competitions" type="button">查看更多 <i data-lucide="chevron-down"></i></button></div>
+        <aside class="catalog-notes" aria-labelledby="catalog-notes-title">
+          <div><p class="section-index">SPECIAL RULES</p><h2 id="catalog-notes-title">目录备注</h2></div>
+          <ul>
+            <li><strong>英语竞赛</strong><span>仅奖励国家级一等奖以上，业绩点系数 0.5。</span></li>
+            <li><strong>数学竞赛</strong><span>预赛拟认定为 C 类，决赛拟认定为 B 类，业绩点计算系数 0.5。</span></li>
+            <li><strong>C2 类</strong><span>不提供学科竞赛指导教师业绩点及贡献值奖励。</span></li>
+          </ul>
+        </aside>
+        <p class="source-note">来源：《南京邮电大学大学生创新创业竞赛项目认定及分类目录（修订）》，南京邮电大学校教发〔2025〕1 号，2025 年 1 月 3 日。</p>
+      </section>
+    </main>
+    <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p></footer>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="app.js?v=7" defer></script>
+  </body>
+</html>

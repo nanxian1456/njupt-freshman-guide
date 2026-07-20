@@ -1,0 +1,216 @@
+[
+  {
+    "id": 1,
+    "college": "人工智能学院",
+    "file": "25人工智能转专业.pdf",
+    "requirements": "符合学校转专业条件，不限专业",
+    "weights": { "academic": 30, "written": 50, "interview": 20 },
+    "note": "笔试成绩按计划人数的 120% 进入面试，面试不合格者不予接收。",
+    "programs": [
+      { "name": "人工智能", "sophomore": 11, "freshman": 16 },
+      { "name": "数据科学与大数据技术", "sophomore": 8, "freshman": 10 },
+      { "name": "机器人工程", "sophomore": null, "freshman": 6 }
+    ]
+  },
+  {
+    "id": 2,
+    "college": "化学与生命科学学院",
+    "file": "25化生转专业.pdf",
+    "requirements": "符合学校转专业相关文件要求，不限专业",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "材料化学", "sophomore": 8, "freshman": 4 },
+      { "name": "分子科学与工程", "sophomore": 4, "freshman": 2 },
+      { "name": "生物医学工程", "sophomore": 3, "freshman": 2 }
+    ]
+  },
+  {
+    "id": 3,
+    "college": "外国语学院",
+    "file": "25外国语转专业.pdf",
+    "requirements": "热爱语言类专业，具备相应语言学习基础",
+    "weights": { "academic": 30, "written": 50, "interview": 20 },
+    "programs": [
+      { "name": "英语", "sophomore": 11, "freshman": 7 },
+      { "name": "翻译", "sophomore": 7, "freshman": 2 }
+    ]
+  },
+  {
+    "id": 4,
+    "college": "教育科学与技术学院",
+    "file": "25教育科技转专业.pdf",
+    "requirements": "符合学校转专业条件，专业不限",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "教育技术学", "sophomore": 3, "freshman": 2 }
+    ]
+  },
+  {
+    "id": 5,
+    "college": "数字媒体与设计艺术学院",
+    "file": "25数媒转专业.pdf",
+    "requirements": "符合学校转专业条件，不限专业",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "数字媒体技术", "sophomore": 15, "freshman": 6 },
+      { "name": "广告学", "sophomore": 3, "freshman": 2 }
+    ]
+  },
+  {
+    "id": 6,
+    "college": "材料科学与工程学院",
+    "file": "25材料转专业.pdf",
+    "requirements": "符合学校转专业相关文件要求，不限专业",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "高分子材料与工程", "sophomore": 9, "freshman": 4 },
+      { "name": "材料物理", "sophomore": 4, "freshman": 4 },
+      { "name": "新能源材料与器件", "sophomore": 5, "freshman": 5 }
+    ]
+  },
+  {
+    "id": 7,
+    "college": "波特兰学院",
+    "file": "25波特兰转专业.pdf",
+    "requirements": "仅限学院内部转入转出；接收人数受实际招生人数限制",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "note": "2026 年计划仅电子科学与技术专业接收大二学生 2 人，其他年级与专业计划为 0。",
+    "programs": [
+      { "name": "通信工程", "sophomore": 0, "freshman": 0 },
+      { "name": "电子科学与技术", "sophomore": 2, "freshman": 0 }
+    ]
+  },
+  {
+    "id": 8,
+    "college": "物联网学院",
+    "file": "25物联网转专业.pdf",
+    "requirements": "符合学校转专业相关文件要求，不限专业",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "网络工程", "sophomore": 25, "freshman": 20 },
+      { "name": "物联网工程", "sophomore": 18, "freshman": 12 },
+      { "name": "地理信息科学", "sophomore": 8, "freshman": 5 },
+      { "name": "测绘工程", "sophomore": 5, "freshman": 3 },
+      { "name": "智能感知工程", "sophomore": null, "freshman": 6 }
+    ]
+  },
+  {
+    "id": 9,
+    "college": "现代邮政学院、智慧交通学院",
+    "file": "25现邮转专业.pdf",
+    "requirements": "符合学校转专业条件，不限专业",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "邮政工程", "sophomore": 9, "freshman": 7 },
+      { "name": "物流管理", "sophomore": 7, "freshman": 2 },
+      { "name": "物流管理+人工智能（双学位）", "sophomore": null, "freshman": 5 }
+    ]
+  },
+  {
+    "id": 10,
+    "college": "理学院",
+    "file": "25理学院转专业.pdf",
+    "requirements": "符合学校转专业条件，不限专业",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "信息与计算科学", "sophomore": 7, "freshman": 9 },
+      { "name": "应用统计学", "sophomore": 10, "freshman": 6 },
+      { "name": "应用物理学", "sophomore": 9, "freshman": 2 },
+      { "name": "应用物理学+电子科学与技术（双学位）", "sophomore": null, "freshman": 6 }
+    ]
+  },
+  {
+    "id": 11,
+    "college": "电子与光学工程学院、柔性电子（未来技术）学院",
+    "file": "25电院转专业.pdf",
+    "requirements": "符合学校转专业相关文件要求，不限专业",
+    "weights": { "academic": 20, "written": 60, "interview": 20 },
+    "programs": [
+      { "name": "电子科学与技术", "sophomore": 10, "freshman": 37 },
+      { "name": "电磁场与无线技术", "sophomore": 16, "freshman": 9 },
+      { "name": "光电信息科学与工程", "sophomore": 46, "freshman": 27 },
+      { "name": "柔性电子学", "sophomore": 13, "freshman": 9 }
+    ]
+  },
+  {
+    "id": 12,
+    "college": "社会与人口学院、社会工作学院",
+    "file": "25社人转专业.pdf",
+    "requirements": "符合学校转专业条件，专业不限",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "社会工作", "sophomore": 5, "freshman": 4 },
+      { "name": "行政管理", "sophomore": 2, "freshman": 1 }
+    ]
+  },
+  {
+    "id": 13,
+    "college": "管理学院",
+    "file": "25管理转专业.pdf",
+    "requirements": "符合学校转专业条件，不限专业",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "工商管理实验班", "sophomore": 7, "freshman": 4 },
+      { "name": "财务管理", "sophomore": 4, "freshman": 4 },
+      { "name": "人力资源管理", "sophomore": 3, "freshman": 2 },
+      { "name": "信息管理与信息系统", "sophomore": 5, "freshman": null },
+      { "name": "大数据管理与应用", "sophomore": 12, "freshman": 9 },
+      { "name": "电子商务", "sophomore": 4, "freshman": null },
+      { "name": "信息管理与信息系统+人工智能（双学位）", "sophomore": null, "freshman": 5 }
+    ]
+  },
+  {
+    "id": 14,
+    "college": "经济学院",
+    "file": "25经济转专业.pdf",
+    "requirements": "符合学校转专业条件，不限专业",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "programs": [
+      { "name": "数字经济", "sophomore": null, "freshman": 3 },
+      { "name": "经济学", "sophomore": 3, "freshman": null },
+      { "name": "经济统计学", "sophomore": 5, "freshman": 7 },
+      { "name": "金融工程", "sophomore": 8, "freshman": 8 },
+      { "name": "金融科技", "sophomore": 4, "freshman": 3 }
+    ]
+  },
+  {
+    "id": 15,
+    "college": "自动化学院",
+    "file": "25自动化转专业.pdf",
+    "requirements": "符合学校转专业条件，不限专业",
+    "weights": { "academic": 30, "written": 50, "interview": 20 },
+    "note": "笔试成绩按计划人数的 120% 进入面试，面试不合格者不予接收。",
+    "programs": [
+      { "name": "自动化", "sophomore": 20, "freshman": 25 },
+      { "name": "测控技术与仪器", "sophomore": 9, "freshman": 7 },
+      { "name": "电气工程及其自动化", "sophomore": 11, "freshman": 12 },
+      { "name": "智能电网信息工程", "sophomore": 12, "freshman": 9 }
+    ]
+  },
+  {
+    "id": 16,
+    "college": "计算机学院、软件学院、网络空间安全学院",
+    "file": "25计软网安转专业.pdf",
+    "requirements": "具备良好的计算机和软件基础，对专业有浓厚兴趣",
+    "weights": { "academic": 40, "written": 40, "interview": 20 },
+    "note": "转专业笔试与面试成绩均不得低于 60 分。",
+    "programs": [
+      { "name": "计算机科学与技术", "sophomore": 9, "freshman": 20 },
+      { "name": "信息安全", "sophomore": 9, "freshman": 22 },
+      { "name": "软件工程", "sophomore": 7, "freshman": 14 }
+    ]
+  },
+  {
+    "id": 17,
+    "college": "通信与信息工程学院",
+    "file": "25通信转专业.pdf",
+    "requirements": "符合学校转专业相关文件要求，不限专业",
+    "weights": { "academic": 20, "written": 60, "interview": 20 },
+    "note": "笔试设置科目最低分要求，并按计划人数的 1.5 倍确定面试名单。",
+    "programs": [
+      { "name": "通信工程", "sophomore": 25, "freshman": 42 },
+      { "name": "电子信息工程", "sophomore": 16, "freshman": 35 },
+      { "name": "广播电视工程", "sophomore": 3, "freshman": 2 }
+    ]
+  }
+]

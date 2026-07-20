@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="南京邮电大学 2026 年转专业计划、申请条件、考核构成与学院细则汇总。" />
+    <title>专业指南 · 邮见南邮</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="styles.css?v=13" />
+  </head>
+  <body data-page="majors">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="返回首页"><span class="brand-mark">邮</span><span><strong>邮见南邮</strong><small>新生校园指南</small></span></a>
+      <nav class="main-nav" aria-label="主要导航">
+        <a href="map.html" data-nav="map"><i data-lucide="map"></i><span>我走过的南邮</span></a>
+        <a href="clubs.html" data-nav="clubs"><i data-lucide="users"></i><span>我遇见的南邮</span></a>
+        <a href="competitions.html" data-nav="competitions"><i data-lucide="trophy"></i><span>我挑战的南邮</span></a>
+        <a href="schedule.html" data-nav="schedule"><i data-lucide="clock-3"></i><span>我生活的南邮</span></a>
+        <a href="dorms.html" data-nav="dorms"><i data-lucide="bed-double"></i><span>我住下的南邮</span></a>
+        <a href="gallery.html" data-nav="gallery"><i data-lucide="images"></i><span>我见过的南邮</span></a>
+        <a href="food.html" data-nav="food"><i data-lucide="utensils"></i><span>我品过的南邮</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="module-hero major-hero">
+        <div><p class="section-index">08 / MAJOR GUIDE</p><h1>专业指南</h1></div>
+        <p>汇总各学院 2026 年转专业接收计划与考核构成，先比较方向，再阅读学院完整细则。</p>
+      </section>
+
+      <section class="page-section major-page" aria-labelledby="major-guide-title">
+        <h2 id="major-guide-title" class="sr-only">2026 年转专业指南</h2>
+        <div class="major-notice">
+          <i data-lucide="info"></i>
+          <div><strong>信息年份：2026</strong><p>以下内容整理自项目“专业指导”文件夹中的学院细则。考试日期已经过去，后续年度申请请以本科生院和学院最新通知为准。</p></div>
+        </div>
+
+        <div class="major-stats" aria-label="转专业计划概览">
+          <div><strong id="major-college-total">0</strong><span>份学院细则</span></div>
+          <div><strong id="major-program-total">0</strong><span>个接收专业</span></div>
+          <div><strong id="major-freshman-total">0</strong><span>大一计划人数</span></div>
+          <div><strong id="major-sophomore-total">0</strong><span>大二计划人数</span></div>
+        </div>
+
+        <div class="major-toolbar">
+          <label class="major-search" for="major-search"><i data-lucide="search"></i><input id="major-search" type="search" placeholder="搜索学院或专业" autocomplete="off" /></label>
+          <p>当前显示 <strong id="major-count">0</strong> 份细则</p>
+        </div>
+
+        <div class="major-list" id="major-list" aria-live="polite"></div>
+        <div class="empty-state major-empty" id="major-empty" hidden><i data-lucide="search-x"></i><p>没有找到匹配的学院或专业，换个关键词试试。</p></div>
+      </section>
+    </main>
+
+    <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p></footer>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="app.js?v=7" defer></script>
+  </body>
+</html>

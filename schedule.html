@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="南京邮电大学教学活动与新生晨跑作息时间。" />
+    <title>作息时间 · 邮见南邮</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="styles.css?v=13" />
+  </head>
+  <body data-page="schedule">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="返回首页"><span class="brand-mark">邮</span><span><strong>邮见南邮</strong><small>新生校园指南</small></span></a>
+      <nav class="main-nav" aria-label="主要导航">
+        <a href="map.html" data-nav="map"><i data-lucide="map"></i><span>我走过的南邮</span></a>
+        <a href="clubs.html" data-nav="clubs"><i data-lucide="users"></i><span>我遇见的南邮</span></a>
+        <a href="competitions.html" data-nav="competitions"><i data-lucide="trophy"></i><span>我挑战的南邮</span></a>
+        <a href="schedule.html" data-nav="schedule"><i data-lucide="clock-3"></i><span>我生活的南邮</span></a>
+        <a href="dorms.html" data-nav="dorms"><i data-lucide="bed-double"></i><span>我住下的南邮</span></a>
+        <a href="gallery.html" data-nav="gallery"><i data-lucide="images"></i><span>我见过的南邮</span></a>
+        <a href="food.html" data-nav="food"><i data-lucide="utensils"></i><span>我品过的南邮</span></a>
+      </nav>
+    </header>
+    <main>
+      <section class="module-hero"><div><p class="section-index">04 / ROUTINE</p><h1>作息时间</h1></div><p>教学活动和晨跑时间集中查看，安排好在南邮的每一天。</p></section>
+      <section class="page-section schedule-page" aria-label="学校作息时间">
+        <section class="schedule-block" aria-labelledby="morning-run-title">
+          <div class="content-heading">
+            <div><p class="section-index">MORNING RUN</p><h2 id="morning-run-title">晨跑时间</h2></div>
+            <p id="run-status">每天早晨，给新一天留出一段清醒的开始。</p>
+          </div>
+          <div class="schedule-board">
+            <div class="time-display" aria-label="晨跑开放时间"><span>06:30</span><i data-lucide="arrow-right"></i><span>07:10</span></div>
+            <div class="run-rules">
+              <div><span class="rule-number">40</span><p><strong>分钟</strong>晨跑开放时段</p></div>
+              <div><span class="rule-number accent">11</span><p><strong>分钟</strong>单次限时</p></div>
+            </div>
+            <div class="timeline" aria-hidden="true"><span>06:30</span><div class="timeline-track"><span id="timeline-progress"></span></div><span>07:10</span></div>
+            <p class="schedule-caution"><i data-lucide="info"></i>晨跑具体路线、次数和有效规则请以学校最新通知为准。</p>
+          </div>
+        </section>
+
+        <section class="schedule-block teaching-block" aria-labelledby="teaching-title">
+          <div class="content-heading">
+            <div><p class="section-index">CLASS SCHEDULE</p><h2 id="teaching-title">教学活动时间表</h2></div>
+            <p>每节课 45 分钟，具体课程安排以个人课表为准。</p>
+          </div>
+          <div class="teaching-schedule">
+            <section class="day-part" aria-labelledby="morning-classes">
+              <h3 id="morning-classes"><i data-lucide="sunrise"></i><span>上午</span></h3>
+              <div class="class-row bell-row"><span>预备铃</span><time>07:50</time></div>
+              <div class="class-row"><span>第一节课</span><time>08:00–08:45</time></div>
+              <div class="class-row"><span>第二节课</span><time>08:50–09:35</time></div>
+              <div class="class-row"><span>第三节课</span><time>09:50–10:35</time></div>
+              <div class="class-row"><span>第四节课</span><time>10:40–11:25</time></div>
+              <div class="class-row"><span>第五节课</span><time>11:30–12:15</time></div>
+            </section>
+            <section class="day-part" aria-labelledby="afternoon-classes">
+              <h3 id="afternoon-classes"><i data-lucide="sun"></i><span>下午</span></h3>
+              <div class="class-row bell-row"><span>预备铃</span><time>13:35</time></div>
+              <div class="class-row"><span>第六节课</span><time>13:45–14:30</time></div>
+              <div class="class-row"><span>第七节课</span><time>14:35–15:20</time></div>
+              <div class="class-row"><span>第八节课</span><time>15:35–16:20</time></div>
+              <div class="class-row"><span>第九节课</span><time>16:25–17:10</time></div>
+            </section>
+            <section class="day-part" aria-labelledby="evening-classes">
+              <h3 id="evening-classes"><i data-lucide="moon"></i><span>晚上</span></h3>
+              <div class="class-row"><span>第十节课</span><time>18:30–19:15</time></div>
+              <div class="class-row"><span>第十一节课</span><time>19:25–20:10</time></div>
+              <div class="class-row"><span>第十二节课</span><time>20:20–21:05</time></div>
+            </section>
+          </div>
+          <p class="source-note">依据南京邮电大学教学活动作息时间表整理。</p>
+        </section>
+      </section>
+    </main>
+    <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p></footer>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="app.js?v=7" defer></script>
+  </body>
+</html>

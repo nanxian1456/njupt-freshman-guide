@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="南京邮电大学新生校园地图、社团名录、竞赛方向、专业指南与作息信息入口。" />
+    <title>邮见南邮 · 新生校园指南</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="styles.css?v=13" />
+  </head>
+  <body data-page="home">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <span class="brand-mark">邮</span>
+        <span><strong>邮见南邮</strong><small>新生校园指南</small></span>
+      </a>
+      <nav class="main-nav" aria-label="主要导航">
+        <a href="map.html" data-nav="map"><i data-lucide="map"></i><span>我走过的南邮</span></a>
+        <a href="clubs.html" data-nav="clubs"><i data-lucide="users"></i><span>我遇见的南邮</span></a>
+        <a href="competitions.html" data-nav="competitions"><i data-lucide="trophy"></i><span>我挑战的南邮</span></a>
+        <a href="schedule.html" data-nav="schedule"><i data-lucide="clock-3"></i><span>我生活的南邮</span></a>
+        <a href="dorms.html" data-nav="dorms"><i data-lucide="bed-double"></i><span>我住下的南邮</span></a>
+        <a href="gallery.html" data-nav="gallery"><i data-lucide="images"></i><span>我见过的南邮</span></a>
+        <a href="food.html" data-nav="food"><i data-lucide="utensils"></i><span>我品过的南邮</span></a>
+      </nav>
+    </header>
+
+    <main class="home-main">
+      <section class="welcome-hero" aria-labelledby="welcome-title">
+        <img class="welcome-photo" src="assets/njupt-gate.jpg" alt="南京邮电大学仙林校区校门与校园景色" />
+        <div class="welcome-shade"></div>
+        <div class="welcome-content">
+          <p class="eyebrow">2026 南邮新生入校指南</p>
+          <h1 id="welcome-title">欢迎来到<br />南京邮电大学</h1>
+          <p>从报到前的准备，到校园里的第一周。地图、生活、社团与学习信息，都从这里开始。</p>
+          <a class="primary-link" href="#guide-path">查看新生路线 <i data-lucide="arrow-down"></i></a>
+        </div>
+        <a class="hero-next" href="#modules" aria-label="查看校园指南模块"><i data-lucide="arrow-down"></i></a>
+        <a class="photo-credit" href="https://www.njupt.edu.cn/17229/list.htm" target="_blank" rel="noreferrer">图片来源：南京邮电大学官网</a>
+      </section>
+
+      <section class="guide-path" id="guide-path" aria-labelledby="guide-path-title">
+        <div class="guide-path-inner">
+          <div class="guide-path-heading">
+            <p class="section-index">NEW STUDENT PATH</p>
+            <h2 id="guide-path-title">先解决眼前的事，再慢慢认识南邮。</h2>
+          </div>
+          <div class="guide-stages">
+            <a class="guide-stage" href="map.html"><span>01</span><div><strong>认识校园</strong><p>先找校门、教学区和生活区</p></div><i data-lucide="arrow-right"></i></a>
+            <a class="guide-stage" href="dorms.html"><span>02</span><div><strong>安顿生活</strong><p>了解宿舍、作息和一日三餐</p></div><i data-lucide="arrow-right"></i></a>
+            <a class="guide-stage" href="clubs.html"><span>03</span><div><strong>参与校园</strong><p>从社团与校园活动找到兴趣</p></div><i data-lucide="arrow-right"></i></a>
+            <a class="guide-stage" href="majors.html"><span>04</span><div><strong>规划成长</strong><p>查看竞赛方向与专业信息</p></div><i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="module-directory" id="modules" aria-labelledby="modules-title">
+        <div class="directory-heading">
+          <div><p class="section-index">EIGHT GUIDES</p><h2 id="modules-title">八个入口，按需要直接查看。</h2></div>
+          <div class="directory-legend" aria-label="内容分组">
+            <span><i class="legend-dot prepare"></i>入学准备</span>
+            <span><i class="legend-dot life"></i>校园生活</span>
+            <span><i class="legend-dot growth"></i>学习成长</span>
+          </div>
+        </div>
+        <div class="module-links">
+          <a class="module-link module-link-photo module-link-map" id="prepare" href="map.html" data-group="prepare">
+            <span class="module-number">01</span><i data-lucide="map"></i>
+            <div><span class="module-group">入学准备</span><h3>校园地图</h3><p>仙林校区位置与周边地点</p></div><i data-lucide="arrow-up-right"></i>
+          </a>
+          <a class="module-link module-link-photo module-link-dorm" href="dorms.html" data-group="prepare">
+            <span class="module-number">02</span><i data-lucide="bed-double"></i>
+            <div><span class="module-group">入学准备</span><h3>宿舍评价</h3><p>浏览 12 个宿舍片区</p></div><i data-lucide="arrow-up-right"></i>
+          </a>
+          <a class="module-link module-link-photo module-link-schedule" href="schedule.html" data-group="prepare">
+            <span class="module-number">03</span><i data-lucide="clock-3"></i>
+            <div><span class="module-group">入学准备</span><h3>作息时间</h3><p>晨跑与教学活动时间表</p></div><i data-lucide="arrow-up-right"></i>
+          </a>
+          <a class="module-link module-link-photo module-link-food" id="life" href="food.html" data-group="life">
+            <span class="module-number">04</span><i data-lucide="utensils"></i>
+            <div><span class="module-group">校园生活</span><h3>南邮美食</h3><p>从一日三餐开始熟悉校园</p></div><i data-lucide="arrow-up-right"></i>
+          </a>
+          <a class="module-link module-link-photo module-link-gallery" href="gallery.html" data-group="life">
+            <span class="module-number">05</span><i data-lucide="images"></i>
+            <div><span class="module-group">校园生活</span><h3>南邮风光</h3><p>从 12 张照片看见校园日常</p></div><i data-lucide="arrow-up-right"></i>
+          </a>
+          <a class="module-link module-link-photo module-link-clubs" id="growth" href="clubs.html" data-group="growth">
+            <span class="module-number">06</span><i data-lucide="users"></i>
+            <div><span class="module-group">学习成长</span><h3>社团一览</h3><p>浏览并筛选 166 个社团</p></div><i data-lucide="arrow-up-right"></i>
+          </a>
+          <a class="module-link module-link-photo module-link-competitions" href="competitions.html" data-group="growth">
+            <span class="module-number">07</span><i data-lucide="trophy"></i>
+            <div><span class="module-group">学习成长</span><h3>官方竞赛目录</h3><p>查询 92 项校级认定项目</p></div><i data-lucide="arrow-up-right"></i>
+          </a>
+          <a class="module-link module-link-photo module-link-majors" href="majors.html" data-group="growth">
+            <span class="module-number">08</span><i data-lucide="graduation-cap"></i>
+            <div><span class="module-group">学习成长</span><h3>专业指南</h3><p>查看 2026 年转专业计划与细则</p></div><i data-lucide="arrow-up-right"></i>
+          </a>
+        </div>
+        <p class="module-photo-note">模块照片使用项目内南邮实拍；宿舍图片来源于<a href="https://hqc.njupt.edu.cn/2022/0831/c4999a225246/page.htm" target="_blank" rel="noreferrer">南京邮电大学后勤管理处 2022 年改造资料</a>。</p>
+      </section>
+
+      <section class="official-resources" aria-labelledby="official-title">
+        <div class="official-resources-inner">
+          <div><p class="section-index">OFFICIAL SOURCES</p><h2 id="official-title">重要信息，以学校官方发布为准。</h2></div>
+          <div class="official-links">
+            <a href="https://www.njupt.edu.cn/" target="_blank" rel="noreferrer"><span>南京邮电大学官网</span><i data-lucide="arrow-up-right"></i></a>
+            <a href="https://zs.njupt.edu.cn/" target="_blank" rel="noreferrer"><span>南京邮电大学本科招生网</span><i data-lucide="arrow-up-right"></i></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>邮见南邮 · 为南邮新生整理</p>
+      <p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="app.js?v=7" defer></script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="南京邮电大学社团名录与分类筛选。" />
+    <title>社团一览 · 邮见南邮</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="styles.css?v=13" />
+  </head>
+  <body data-page="clubs">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="返回首页"><span class="brand-mark">邮</span><span><strong>邮见南邮</strong><small>新生校园指南</small></span></a>
+      <nav class="main-nav" aria-label="主要导航">
+        <a href="map.html" data-nav="map"><i data-lucide="map"></i><span>我走过的南邮</span></a>
+        <a href="clubs.html" data-nav="clubs"><i data-lucide="users"></i><span>我遇见的南邮</span></a>
+        <a href="competitions.html" data-nav="competitions"><i data-lucide="trophy"></i><span>我挑战的南邮</span></a>
+        <a href="schedule.html" data-nav="schedule"><i data-lucide="clock-3"></i><span>我生活的南邮</span></a>
+        <a href="dorms.html" data-nav="dorms"><i data-lucide="bed-double"></i><span>我住下的南邮</span></a>
+        <a href="gallery.html" data-nav="gallery"><i data-lucide="images"></i><span>我见过的南邮</span></a>
+        <a href="food.html" data-nav="food"><i data-lucide="utensils"></i><span>我品过的南邮</span></a>
+      </nav>
+    </header>
+    <main>
+      <section class="module-hero"><div><p class="section-index">02 / CLUBS</p><h1>社团一览</h1></div><p>按兴趣和指导单位筛选，先找到想认识的人。</p></section>
+      <section class="page-section clubs-page" aria-label="社团名录">
+        <div class="club-tools">
+          <label class="search-box"><i data-lucide="search"></i><span class="sr-only">搜索社团</span><input id="club-search" type="search" placeholder="搜索社团、类别或指导单位" autocomplete="off" /><kbd id="club-count">166</kbd></label>
+          <label class="select-box"><span class="sr-only">按指导单位筛选</span><select id="unit-filter"><option value="all">全部指导单位</option></select><i data-lucide="chevron-down"></i></label>
+        </div>
+        <div class="segmented-filter" id="club-type-filter" aria-label="按社团类型筛选"></div>
+        <div class="club-grid" id="club-grid" aria-live="polite"></div>
+        <div class="list-footer"><p id="club-summary"></p><button class="secondary-button" id="load-more-clubs" type="button">查看更多 <i data-lucide="chevron-down"></i></button></div>
+        <p class="source-note">名录整理自《南邮社团名单》，当前资料包含社团名称、所属类别与指导单位。</p>
+      </section>
+    </main>
+    <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p></footer>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="app.js?v=7" defer></script>
+  </body>
+</html>

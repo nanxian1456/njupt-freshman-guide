@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="南京邮电大学仙林校区交互地图、周边地铁、到校换乘与校区交通车指南。" />
+    <title>校园地图 · 邮见南邮</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://tile.openstreetmap.org" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="styles.css?v=13" />
+  </head>
+  <body data-page="map">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="返回首页"><span class="brand-mark">邮</span><span><strong>邮见南邮</strong><small>新生校园指南</small></span></a>
+      <nav class="main-nav" aria-label="主要导航">
+        <a href="map.html" data-nav="map"><i data-lucide="map"></i><span>我走过的南邮</span></a>
+        <a href="clubs.html" data-nav="clubs"><i data-lucide="users"></i><span>我遇见的南邮</span></a>
+        <a href="competitions.html" data-nav="competitions"><i data-lucide="trophy"></i><span>我挑战的南邮</span></a>
+        <a href="schedule.html" data-nav="schedule"><i data-lucide="clock-3"></i><span>我生活的南邮</span></a>
+        <a href="dorms.html" data-nav="dorms"><i data-lucide="bed-double"></i><span>我住下的南邮</span></a>
+        <a href="gallery.html" data-nav="gallery"><i data-lucide="images"></i><span>我见过的南邮</span></a>
+        <a href="food.html" data-nav="food"><i data-lucide="utensils"></i><span>我品过的南邮</span></a>
+      </nav>
+    </header>
+    <main>
+      <section class="module-hero"><div><p class="section-index">01 / CAMPUS</p><h1>仙林校区地图</h1></div><p>从校内通勤到地铁换乘，先看清目的地，再安排最后一公里。</p></section>
+      <section class="page-section map-page" aria-label="校园地图">
+        <div class="map-shell map-shell-large">
+          <div id="campus-map" aria-label="南京邮电大学仙林校区交互地图"></div>
+          <div class="map-toolbar" aria-label="地图工具">
+            <button type="button" id="reset-map" title="回到仙林校区中心"><i data-lucide="locate-fixed"></i><span>校区中心</span></button>
+            <button type="button" id="find-me" title="显示我的位置"><i data-lucide="navigation"></i><span>我的位置</span></button>
+            <button type="button" id="show-transit" title="查看校园周边地铁站"><i data-lucide="route"></i><span>周边交通</span></button>
+          </div>
+          <div class="map-status"><span class="status-dot"></span>仙林校区 · 文苑路 9 号</div>
+        </div>
+        <div class="transport-panel" aria-label="校园出行提示">
+          <h4>校园出行提示</h4>
+          <div class="transport-tips">
+            <p><i data-lucide="footprints"></i><span><strong>步行</strong> 宿舍到教学区需留出余量，第一次上课建议提前熟悉路线。</span></p>
+            <p><i data-lucide="bike"></i><span><strong>骑行</strong> 共享单车按划定区域停放；共享电单车不得进入校园。</span></p>
+            <p><i data-lucide="train-front"></i><span><strong>公共交通</strong> 地铁 2 号线到站后仍有地面路程，带行李时优先公交或正规打车。</span></p>
+          </div>
+        </div>
+        <p class="source-note">地图数据来自 OpenStreetMap。站点、校门开放状态和临时交通组织请以出发当天的实时导航及学校通知为准。</p>
+
+        <section class="travel-guide" aria-labelledby="travel-guide-title">
+          <div class="section-heading travel-heading">
+            <div><p class="section-index">TRAVEL GUIDE</p><h2 id="travel-guide-title">先选地铁锚点，再解决最后一公里。</h2></div>
+            <p>仙林中心站和羊山公园站都在地铁 2 号线上。哪一站更方便取决于宿舍、校门、行李数量和当时的接驳情况。</p>
+          </div>
+
+          <div class="transit-anchor-grid">
+            <article class="transit-anchor">
+              <div><i data-lucide="train-front"></i><span>地铁 2 号线</span></div>
+              <h3>仙林中心站</h3>
+              <p>从南京站、南京南站换乘后可在此下车。周边接驳选择相对集中，适合作为携带行李到校的默认锚点。</p>
+              <small>到文苑路 9 号仍有一段地面路程</small>
+            </article>
+            <article class="transit-anchor">
+              <div><i data-lucide="train-front"></i><span>地铁 2 号线</span></div>
+              <h3>羊山公园站</h3>
+              <p>位于校园东南方向。前往东侧区域或轻装出行时，可以和仙林中心站比较实时步行、公交及骑行路线。</p>
+              <small>不要只比较直线距离，应以目标校门为终点</small>
+            </article>
+          </div>
+
+          <section class="arrival-guide" aria-labelledby="arrival-title">
+            <div class="content-heading">
+              <div><p class="section-index">ARRIVAL ROUTES</p><h2 id="arrival-title">从主要交通枢纽到仙林校区</h2></div>
+              <p>以下时间是包含候车、换乘和最后一公里的保守预留，不是固定用时。</p>
+            </div>
+            <div class="arrival-route-grid">
+              <article class="arrival-route">
+                <header><span>01</span><i data-lucide="train"></i><h3>南京站</h3></header>
+                <p><strong>地铁 1 号线</strong>到新街口站，换乘<strong>地铁 2 号线</strong>往经天路方向，在仙林中心站下车后接驳到校。</p>
+                <small>建议预留 70—90 分钟</small>
+              </article>
+              <article class="arrival-route">
+                <header><span>02</span><i data-lucide="train"></i><h3>南京南站</h3></header>
+                <p><strong>地铁 3 号线</strong>到大行宫站，换乘<strong>地铁 2 号线</strong>往经天路方向，在仙林中心站下车后接驳到校。</p>
+                <small>建议预留 80—100 分钟</small>
+              </article>
+              <article class="arrival-route">
+                <header><span>03</span><i data-lucide="plane"></i><h3>禄口机场</h3></header>
+                <p>乘<strong>地铁 S1 号线</strong>到南京南站，再按南京南站路线换乘；大件行李较多时可从正规上车点打车。</p>
+                <small>建议预留 120—150 分钟</small>
+              </article>
+              <article class="arrival-route">
+                <header><span>04</span><i data-lucide="car-front"></i><h3>自驾或打车</h3></header>
+                <p>目的地填写<strong>南京邮电大学仙林校区，栖霞区文苑路 9 号</strong>。报到高峰按现场标识前往临时下客点。</p>
+                <small>不要提前假设车辆可以驶入校园</small>
+              </article>
+            </div>
+          </section>
+
+          <section class="travel-decisions" aria-label="出行建议">
+            <article><i data-lucide="luggage"></i><div><h3>行李多</h3><p>地铁到站后优先公交或正规打车，避免拖着大件行李长距离步行。</p></div></article>
+            <article><i data-lucide="clock-3"></i><div><h3>赶早课</h3><p>第一次从宿舍去教室多留 15—20 分钟；早高峰不要把共享单车当作唯一方案。</p></div></article>
+            <article><i data-lucide="moon"></i><div><h3>晚间返校</h3><p>进城前先查返程末班车，错过地铁后只从正规平台和上车点叫车。</p></div></article>
+          </section>
+
+          <section class="shuttle-guide" aria-labelledby="shuttle-title">
+            <div class="content-heading">
+              <div><p class="section-index">CAMPUS SHUTTLE</p><h2 id="shuttle-title">仙林与三牌楼校区交通车</h2></div>
+              <p>当前公开表为 2025 年 9 月 5 日起执行的工作日安排；法定节假日停运，寒暑假另行安排。</p>
+            </div>
+            <div class="shuttle-directions">
+              <article><header><i data-lucide="arrow-right"></i><div><h3>市区 → 仙林</h3><p>三牌楼始发，终到学科楼转盘</p></div></header><div class="shuttle-times"><span>06:50</span><span>07:35</span><span>12:30</span><span>17:20</span></div></article>
+              <article><header><i data-lucide="arrow-left"></i><div><h3>仙林 → 市区</h3><p>青教公寓或学科楼转盘始发</p></div></header><div class="shuttle-times"><span>06:50</span><span>10:00</span><span>12:30</span><span>17:20</span></div></article>
+            </div>
+            <div class="travel-source-links">
+              <a href="https://www.njmetro.com.cn/" target="_blank" rel="noreferrer">南京地铁官方信息 <i data-lucide="arrow-up-right"></i></a>
+              <a href="https://hqjt.njupt.edu.cn/bcskb/list.htm" target="_blank" rel="noreferrer">南邮后勤交通车时刻表 <i data-lucide="arrow-up-right"></i></a>
+            </div>
+            <p class="source-note">信息整理于 2026-07-20。报到接站、交通车临时调整、地铁运营时间及校门车辆管理均以对应官方渠道最新发布为准。</p>
+          </section>
+        </section>
+      </section>
+    </main>
+    <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p></footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="app.js?v=7" defer></script>
+  </body>
+</html>
