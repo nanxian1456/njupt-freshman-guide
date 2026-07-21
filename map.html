@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="南京邮电大学仙林校区交互地图、周边地铁、到校换乘与校区交通车指南。" />
     <title>校园地图 · 邮见南邮</title>
-    <link rel="preconnect" href="https://unpkg.com" />
     <link rel="preconnect" href="https://tile.openstreetmap.org" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css?v=1" />
     <link rel="stylesheet" href="styles.css?v=13" />
   </head>
   <body data-page="map">
@@ -28,6 +27,11 @@
       <section class="page-section map-page" aria-label="校园地图">
         <div class="map-shell map-shell-large">
           <div id="campus-map" aria-label="南京邮电大学仙林校区交互地图"></div>
+          <div class="map-load-state" id="map-load-state" role="status" aria-live="polite">
+            <span class="map-loader" aria-hidden="true"></span>
+            <p><strong>地图加载中</strong><span>正在连接底图服务</span></p>
+            <a href="https://uri.amap.com/search?keyword=%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6%E4%BB%99%E6%9E%97%E6%A0%A1%E5%8C%BA&city=%E5%8D%97%E4%BA%AC&callnative=1" target="_blank" rel="noreferrer">高德地图打开</a>
+          </div>
           <div class="map-toolbar" aria-label="地图工具">
             <button type="button" id="reset-map" title="回到仙林校区中心"><i data-lucide="locate-fixed"></i><span>校区中心</span></button>
             <button type="button" id="find-me" title="显示我的位置"><i data-lucide="navigation"></i><span>我的位置</span></button>
@@ -120,8 +124,8 @@
       </section>
     </main>
     <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p><p class="footer-note">学长为爱发电，无任何营销性质。</p></footer>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="assets/vendor/leaflet/leaflet.js?v=1"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-    <script src="app.js?v=7" defer></script>
+    <script src="app.js?v=8" defer></script>
   </body>
 </html>

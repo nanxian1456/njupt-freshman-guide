@@ -137,7 +137,16 @@ main { overflow: hidden; }
 
 .map-section { max-width: none; padding-left: max(24px, calc((100vw - var(--max-width)) / 2)); padding-right: max(24px, calc((100vw - var(--max-width)) / 2)); background: #e8f0fa; }
 .map-shell { position: relative; min-height: 530px; overflow: hidden; border: 1px solid #c8d8e8; border-radius: 8px; background: #d6e2ef; }
-#campus-map { width: 100%; min-height: 530px; z-index: 1; }
+#campus-map { width: 100%; min-height: 530px; z-index: 1; background: #d6e2ef url("assets/njupt-campus-map.jpg") center / cover no-repeat; }
+.map-load-state { position: absolute; z-index: 520; top: 50%; left: 50%; display: flex; align-items: center; gap: 12px; width: max-content; max-width: calc(100% - 32px); padding: 12px 14px; border: 1px solid rgba(255,255,255,0.72); border-radius: 6px; background: rgba(255,255,255,0.94); box-shadow: 0 8px 24px rgba(11,31,58,0.18); transform: translate(-50%, -50%); transition: opacity 180ms ease, visibility 180ms ease; }
+.map-load-state p { display: grid; gap: 2px; margin: 0; }
+.map-load-state strong { color: var(--ink); font-size: 13px; }
+.map-load-state p span { color: var(--muted); font-size: 12px; }
+.map-load-state a { display: none; padding: 8px 10px; border-radius: 5px; background: var(--ink); color: #fff; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.map-load-state.is-slow a, .map-load-state.is-error a { display: inline-flex; }
+.map-load-state.is-error .map-loader { display: none; }
+.map-load-state.is-hidden { visibility: hidden; opacity: 0; pointer-events: none; }
+.map-loader { width: 20px; height: 20px; flex: 0 0 20px; border: 2px solid #c8d8e8; border-top-color: var(--green); border-radius: 50%; animation: map-loader-spin 800ms linear infinite; }
 .map-toolbar { position: absolute; z-index: 500; top: 16px; left: 16px; display: flex; gap: 8px; }
 .map-toolbar button { height: 40px; display: inline-flex; align-items: center; gap: 7px; padding: 0 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); box-shadow: 0 4px 16px rgba(11,31,58,0.13); cursor: pointer; font-size: 13px; font-weight: 700; }
 .map-toolbar button:hover { color: var(--green); }
@@ -409,6 +418,7 @@ body.page-enter .module-hero h1, body.page-enter .welcome-content { animation: p
   0% { box-shadow: 0 0 0 4px rgba(125,211,252,0.2); }
   70%, 100% { box-shadow: 0 0 0 12px rgba(125,211,252,0); }
 }
+@keyframes map-loader-spin { to { transform: rotate(360deg); } }
 @keyframes page-title-enter {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
@@ -492,6 +502,9 @@ footer .footer-note { font-size: 11px; opacity: 0.82; }
   .section-heading > p { justify-self: start; }
   .page-section { padding-top: 58px; padding-bottom: 58px; }
   .map-shell, #campus-map { min-height: 440px; }
+  .map-load-state { top: 52%; flex-wrap: wrap; justify-content: center; width: calc(100% - 32px); }
+  .map-load-state p { flex: 1; min-width: 140px; }
+  .map-load-state a { justify-content: center; width: 100%; }
   .map-toolbar { right: 12px; left: 12px; }
   .map-toolbar button { flex: 1; justify-content: center; }
   .map-status { right: 12px; bottom: 12px; left: 12px; justify-content: center; }

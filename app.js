@@ -272,16 +272,51 @@ function initWelcomeMap() {
 
 function initMap() {
   const container = document.querySelector("#campus-map");
+  const loadState = document.querySelector("#map-load-state");
   if (!container) return;
   if (!window.L) {
-    container.innerHTML = '<div class="empty-state"><p>地图底图暂时无法加载，请检查网络后刷新。</p></div>';
+    loadState?.classList.add("is-error");
+    const title = loadState?.querySelector("strong");
+    const detail = loadState?.querySelector("p span");
+    if (title) title.textContent = "交互地图暂时无法加载";
+    if (detail) detail.textContent = "可使用下方入口继续导航";
     return;
   }
   const map = L.map(container, { zoomControl: false }).setView(CAMPUS.center, CAMPUS.zoom);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  const tiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
+    updateWhenIdle: true,
+    keepBuffer: 2,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
+
+  let tileErrors = 0;
+  let mapReady = false;
+  const loadingTimer = window.setTimeout(() => {
+    if (!mapReady) loadState?.classList.add("is-slow");
+  }, 5000);
+  const markMapReady = () => {
+    if (mapReady) return;
+    mapReady = true;
+    window.clearTimeout(loadingTimer);
+    loadState?.classList.add("is-hidden");
+  };
+  tiles.once("tileload", markMapReady);
+  tiles.on("tileerror", () => {
+    tileErrors += 1;
+    if (mapReady || tileErrors < 3) return;
+    loadState?.classList.add("is-error");
+    const title = loadState?.querySelector("strong");
+    const detail = loadState?.querySelector("p span");
+    if (title) title.textContent = "底图连接较慢";
+    if (detail) detail.textContent = "校园位置仍可通过高德地图查看";
+  });
+
+  const refreshMapSize = () => window.setTimeout(() => map.invalidateSize({ pan: false }), 80);
+  refreshMapSize();
+  window.addEventListener("orientationchange", refreshMapSize);
+  if (window.ResizeObserver) new ResizeObserver(refreshMapSize).observe(container);
+
   L.control.zoom({ position: "bottomleft" }).addTo(map);
   L.circle(CAMPUS.center, {
     radius: 160,
