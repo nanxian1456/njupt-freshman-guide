@@ -335,6 +335,13 @@ main { overflow: hidden; }
 
 .food-page { padding-top: 28px; }
 .food-intro { max-width: 760px; margin: 0 0 42px; color: var(--muted); font-size: 16px; line-height: 1.8; }
+.food-campus-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin: 0 0 18px; }
+.food-campus-heading > div { position: relative; padding-left: 42px; }
+.food-campus-heading > div > span { position: absolute; top: 5px; left: 0; color: var(--coral); font: 800 11px/1 "Segoe UI", sans-serif; }
+.food-campus-heading .section-index { margin-bottom: 3px; }
+.food-campus-heading h2 { margin: 0; font-size: 30px; }
+.food-campus-heading > p { max-width: 430px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: right; }
+.food-campus-heading-sanpailou { margin-top: 72px; }
  .food-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; border-top: 1px solid var(--ink); }
  .food-card { position: relative; overflow: hidden; min-height: 260px; padding: 30px 24px 24px; border-bottom: 1px solid var(--line); transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease; transform-style: preserve-3d; will-change: transform, box-shadow; }
  .food-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top left, rgba(31,95,166,0.15), transparent 36%); opacity: 0; transition: opacity 220ms ease; pointer-events: none; }
@@ -350,6 +357,10 @@ main { overflow: hidden; }
  .food-card:hover::after { opacity: 1; transform: translateX(0); }
  .food-card:hover > svg { transform: translateY(-3px) rotate(-5deg) scale(1.05); color: var(--blue); }
  .food-card small { position: absolute; top: 28px; right: 24px; color: var(--muted); font: 700 10px/1 monospace; }
+.food-grid-sanpailou { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.food-card-updating { min-height: 280px; background: #f7faff; }
+.food-update-badge { display: inline-flex; align-items: center; min-height: 26px; margin-top: 12px; padding: 0 8px; color: #fff; background: var(--coral); border-radius: 3px; font-size: 10px; font-weight: 800; }
+.food-note { margin: 28px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
 
 .major-page { padding-top: 28px; }
 .major-notice { min-height: 92px; display: grid; grid-template-columns: 24px 1fr; align-items: center; gap: 18px; padding: 20px 24px; color: #dce8f4; background: var(--ink); border-radius: 4px; }
@@ -855,6 +866,7 @@ h1, h2, h3, h4 { letter-spacing: 0; }
 .transit-anchor > div svg { width: 18px; }
 .transit-anchor h3 { margin: 34px 0 10px; font-size: 24px; }
 .transit-anchor p { max-width: 480px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.75; }
+.transit-anchor p strong { color: var(--ink); }
 .transit-anchor small { display: block; margin-top: 18px; padding-top: 13px; color: var(--coral); border-top: 1px solid var(--line); font-size: 10px; font-weight: 800; }
 .arrival-guide, .shuttle-guide { margin-top: 76px; }
 .arrival-route-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
@@ -866,6 +878,15 @@ h1, h2, h3, h4 { letter-spacing: 0; }
 .arrival-route p { margin: 30px 0 22px; color: var(--muted); font-size: 11px; line-height: 1.75; }
 .arrival-route p strong { color: var(--ink); }
 .arrival-route small { margin-top: auto; padding-top: 12px; color: var(--green-dark); border-top: 1px solid var(--line); font-size: 10px; font-weight: 800; }
+.arrival-route-sanpailou { border-top-color: var(--coral); }
+.arrival-route-sanpailou header svg { color: var(--coral); }
+.rail-hub-guide { margin-top: 76px; }
+.rail-hub-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.rail-hub-grid article { min-height: 235px; padding: 24px; background: var(--ink); color: #fff; border-radius: 6px; }
+.rail-hub-grid article > div { display: flex; align-items: center; gap: 8px; color: #8fc5f4; font-size: 10px; font-weight: 800; }
+.rail-hub-grid article > div svg { width: 18px; }
+.rail-hub-grid h3 { margin: 38px 0 10px; font-size: 23px; }
+.rail-hub-grid p { margin: 0; color: #c5d2e1; font-size: 11px; line-height: 1.75; }
 .travel-decisions { margin-top: 70px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
 .travel-decisions article { min-height: 150px; display: grid; grid-template-columns: 26px minmax(0, 1fr); align-content: center; gap: 14px; padding: 22px; }
 .travel-decisions article + article { border-left: 1px solid var(--line); }
@@ -893,17 +914,23 @@ h1, h2, h3, h4 { letter-spacing: 0; }
   .travel-decisions { grid-template-columns: 1fr; }
   .travel-decisions article { min-height: 120px; }
   .travel-decisions article + article { border-top: 1px solid var(--line); border-left: 0; }
+  .rail-hub-grid { grid-template-columns: 1fr; }
+  .rail-hub-grid article { min-height: 190px; }
 }
 
 @media (max-width: 640px) {
   .travel-guide { margin-top: 60px; padding-top: 52px; }
   .transit-anchor-grid, .arrival-route-grid, .shuttle-directions { grid-template-columns: 1fr; }
   .transit-anchor { min-height: 215px; padding: 20px 18px; }
-  .arrival-guide, .shuttle-guide { margin-top: 58px; }
+  .arrival-guide, .rail-hub-guide, .shuttle-guide { margin-top: 58px; }
   .arrival-route { min-height: auto; }
   .arrival-route small { margin-top: 6px; }
   .travel-decisions { margin-top: 54px; }
   .shuttle-times span { min-height: 40px; font-size: 12px; }
   .travel-source-links { grid-template-columns: 1fr; }
   .travel-source-links a + a { padding-left: 0; border-left: 0; }
+  .food-campus-heading { display: block; }
+  .food-campus-heading > p { margin-top: 10px; text-align: left; }
+  .food-campus-heading-sanpailou { margin-top: 52px; }
+  .food-grid-sanpailou { grid-template-columns: 1fr; }
 }
