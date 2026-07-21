@@ -3,7 +3,7 @@ const CAMPUSES = {
     name: "南京邮电大学仙林校区",
     shortName: "仙林校区",
     address: "栖霞区文苑路 9 号",
-    image: "assets/map-xianlin.jpg",
+    image: "assets/map-xianlin-campus.jpg",
   },
   sanpailou: {
     name: "南京邮电大学三牌楼校区",
