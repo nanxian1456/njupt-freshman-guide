@@ -1,13 +1,30 @@
-const CAMPUS = {
-  name: "南京邮电大学仙林校区",
-  center: [32.1152716, 118.9259566],
-  zoom: 16,
+const CAMPUSES = {
+  xianlin: {
+    name: "南京邮电大学仙林校区",
+    shortName: "仙林校区",
+    address: "栖霞区文苑路 9 号",
+    center: [32.1152716, 118.9259566],
+    zoom: 16,
+    amapQuery: "南京邮电大学仙林校区",
+    transitAnchors: [
+      { name: "仙林中心站", line: "地铁 2 号线", center: [32.1021286, 118.9248065] },
+      { name: "羊山公园站", line: "地铁 2 号线", center: [32.1076347, 118.9380395] },
+    ],
+  },
+  sanpailou: {
+    name: "南京邮电大学三牌楼校区",
+    shortName: "三牌楼校区",
+    address: "鼓楼区新模范马路 66 号",
+    center: [32.0832778, 118.765656],
+    zoom: 16,
+    amapQuery: "南京邮电大学三牌楼校区",
+    transitAnchors: [
+      { name: "新模范马路站", line: "地铁 1 号线", center: [32.0819286, 118.7785505] },
+    ],
+  },
 };
 
-const TRANSIT_ANCHORS = [
-  { name: "仙林中心站", line: "地铁 2 号线", center: [32.1021286, 118.9248065] },
-  { name: "羊山公园站", line: "地铁 2 号线", center: [32.1076347, 118.9380395] },
-];
+const CAMPUS = CAMPUSES.xianlin;
 
 const GUIDE_GROUPS = {
   prepare: { label: "入学准备", icon: "compass", pages: ["map", "dorms", "schedule"] },
@@ -318,27 +335,49 @@ function initMap() {
   if (window.ResizeObserver) new ResizeObserver(refreshMapSize).observe(container);
 
   L.control.zoom({ position: "bottomleft" }).addTo(map);
-  L.circle(CAMPUS.center, {
-    radius: 160,
-    color: "#187c63",
-    weight: 2,
-    fillColor: "#6fe0a6",
-    fillOpacity: 0.08,
-  }).addTo(map).bindPopup(`<strong>${CAMPUS.name}</strong><br>文苑路 9 号`);
-  L.marker(CAMPUS.center).addTo(map).bindPopup(`<strong>${CAMPUS.name}</strong><br>校区中心`).openPopup();
+  const campusLayer = L.layerGroup().addTo(map);
+  const statusText = document.querySelector("#map-campus-status-text");
+  const fallbackLink = document.querySelector("#map-fallback-link");
+  const campusButtons = [...document.querySelectorAll("[data-campus-key]")];
+  let activeCampus = CAMPUS;
 
-  const transitMarkers = TRANSIT_ANCHORS.map((station) => L.circleMarker(station.center, {
-    radius: 8,
-    color: "#ffffff",
-    weight: 3,
-    fillColor: "#d9564a",
-    fillOpacity: 1,
-  }).addTo(map).bindPopup(`<strong>${station.name}</strong><br>${station.line}<br>到校请结合实时接驳路线`));
+  const renderCampus = (campusKey, animate = true) => {
+    activeCampus = CAMPUSES[campusKey] || CAMPUS;
+    campusLayer.clearLayers();
+    L.circle(activeCampus.center, {
+      radius: 160,
+      color: "#187c63",
+      weight: 2,
+      fillColor: "#6fe0a6",
+      fillOpacity: 0.08,
+    }).addTo(campusLayer).bindPopup(`<strong>${activeCampus.name}</strong><br>${activeCampus.address}`);
+    L.marker(activeCampus.center).addTo(campusLayer).bindPopup(`<strong>${activeCampus.name}</strong><br>${activeCampus.address}`);
+    activeCampus.transitAnchors.forEach((station) => L.circleMarker(station.center, {
+      radius: 8,
+      color: "#ffffff",
+      weight: 3,
+      fillColor: "#d9564a",
+      fillOpacity: 1,
+    }).addTo(campusLayer).bindPopup(`<strong>${station.name}</strong><br>${station.line}<br>到校请结合实时接驳路线`));
 
-  document.querySelector("#reset-map")?.addEventListener("click", () => map.flyTo(CAMPUS.center, CAMPUS.zoom));
+    if (animate) map.flyTo(activeCampus.center, activeCampus.zoom);
+    else map.setView(activeCampus.center, activeCampus.zoom);
+    if (statusText) statusText.textContent = `${activeCampus.shortName} · ${activeCampus.address}`;
+    if (fallbackLink) {
+      fallbackLink.href = `https://uri.amap.com/search?keyword=${encodeURIComponent(activeCampus.amapQuery)}&city=${encodeURIComponent("南京")}&callnative=1`;
+    }
+    campusButtons.forEach((button) => {
+      const selected = button.dataset.campusKey === campusKey;
+      button.classList.toggle("active", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+  };
+
+  renderCampus("xianlin", false);
+  campusButtons.forEach((button) => button.addEventListener("click", () => renderCampus(button.dataset.campusKey)));
+  document.querySelector("#reset-map")?.addEventListener("click", () => map.flyTo(activeCampus.center, activeCampus.zoom));
   document.querySelector("#show-transit")?.addEventListener("click", () => {
-    map.fitBounds(L.latLngBounds([CAMPUS.center, ...TRANSIT_ANCHORS.map((station) => station.center)]), { padding: [36, 36] });
-    transitMarkers[0].openPopup();
+    map.fitBounds(L.latLngBounds([activeCampus.center, ...activeCampus.transitAnchors.map((station) => station.center)]), { padding: [36, 36] });
   });
   document.querySelector("#find-me")?.addEventListener("click", () => {
     map.locate({ setView: true, maxZoom: 17 });

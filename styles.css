@@ -136,6 +136,10 @@ main { overflow: hidden; }
 .source-note { margin: 12px 0 0; color: #718096; font-size: 12px; line-height: 1.6; }
 
 .map-section { max-width: none; padding-left: max(24px, calc((100vw - var(--max-width)) / 2)); padding-right: max(24px, calc((100vw - var(--max-width)) / 2)); background: #e8f0fa; }
+.map-control-panel { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.campus-switcher { display: inline-flex; padding: 4px; border: 1px solid var(--line); border-radius: 6px; background: #e8f0fa; }
+.campus-switcher button { min-height: 38px; padding: 0 16px; border: 0; border-radius: 4px; background: transparent; color: var(--muted); cursor: pointer; font-weight: 700; }
+.campus-switcher button.active { background: var(--ink); color: #fff; }
 .map-shell { position: relative; min-height: 530px; overflow: hidden; border: 1px solid #c8d8e8; border-radius: 8px; background: #d6e2ef; }
 #campus-map { width: 100%; min-height: 530px; z-index: 1; background: #d6e2ef url("assets/njupt-campus-map.jpg") center / cover no-repeat; }
 .map-load-state { position: absolute; z-index: 520; top: 50%; left: 50%; display: flex; align-items: center; gap: 12px; width: max-content; max-width: calc(100% - 32px); padding: 12px 14px; border: 1px solid rgba(255,255,255,0.72); border-radius: 6px; background: rgba(255,255,255,0.94); box-shadow: 0 8px 24px rgba(11,31,58,0.18); transform: translate(-50%, -50%); transition: opacity 180ms ease, visibility 180ms ease; }
@@ -147,11 +151,12 @@ main { overflow: hidden; }
 .map-load-state.is-error .map-loader { display: none; }
 .map-load-state.is-hidden { visibility: hidden; opacity: 0; pointer-events: none; }
 .map-loader { width: 20px; height: 20px; flex: 0 0 20px; border: 2px solid #c8d8e8; border-top-color: var(--green); border-radius: 50%; animation: map-loader-spin 800ms linear infinite; }
-.map-toolbar { position: absolute; z-index: 500; top: 16px; left: 16px; display: flex; gap: 8px; }
-.map-toolbar button { height: 40px; display: inline-flex; align-items: center; gap: 7px; padding: 0 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); box-shadow: 0 4px 16px rgba(11,31,58,0.13); cursor: pointer; font-size: 13px; font-weight: 700; }
+.map-toolbar { display: flex; gap: 8px; }
+.map-toolbar button { height: 40px; display: inline-flex; align-items: center; gap: 7px; padding: 0 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); cursor: pointer; font-size: 13px; font-weight: 700; }
 .map-toolbar button:hover { color: var(--green); }
 .map-toolbar svg { width: 16px; }
-.map-status { position: absolute; z-index: 500; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 8px; padding: 10px 13px; background: var(--ink); color: #fff; border-radius: 6px; font-size: 12px; box-shadow: var(--shadow); }
+.map-meta { display: flex; justify-content: flex-end; margin-top: 10px; }
+.map-status { display: flex; align-items: center; gap: 8px; padding: 9px 12px; background: var(--ink); color: #fff; border-radius: 6px; font-size: 12px; }
 .status-dot { width: 7px; height: 7px; background: #7dd3fc; border-radius: 50%; box-shadow: 0 0 0 4px rgba(125,211,252,0.18); }
 .map-shell:hover .status-dot { animation: map-status-pulse 1.4s ease-out infinite; }
 .transport-panel { position: relative; margin: 16px auto 0; z-index: 2; width: min(100%, 560px); background: rgba(255,255,255,0.98); border: 1px solid var(--line); border-radius: 8px; padding: 12px; box-shadow: 0 10px 30px rgba(11,31,58,0.08); }
@@ -502,12 +507,16 @@ footer .footer-note { font-size: 11px; opacity: 0.82; }
   .section-heading > p { justify-self: start; }
   .page-section { padding-top: 58px; padding-bottom: 58px; }
   .map-shell, #campus-map { min-height: 440px; }
+  .map-control-panel { align-items: stretch; flex-direction: column; }
+  .campus-switcher { display: flex; }
+  .campus-switcher button { flex: 1; }
   .map-load-state { top: 52%; flex-wrap: wrap; justify-content: center; width: calc(100% - 32px); }
   .map-load-state p { flex: 1; min-width: 140px; }
   .map-load-state a { justify-content: center; width: 100%; }
-  .map-toolbar { right: 12px; left: 12px; }
+  .map-toolbar { width: 100%; }
   .map-toolbar button { flex: 1; justify-content: center; }
-  .map-status { right: 12px; bottom: 12px; left: 12px; justify-content: center; }
+  .map-meta { justify-content: stretch; }
+  .map-status { justify-content: center; width: 100%; }
   .club-tools { grid-template-columns: 1fr; }
   .segmented-filter { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; }
   .segmented-filter { scrollbar-width: none; }
