@@ -3,11 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="南京邮电大学仙林校区、三牌楼校区交互地图与周边交通指南。" />
+    <meta name="description" content="南京邮电大学仙林校区、三牌楼校区静态地图图片与周边交通指南。" />
     <title>校园地图 · 邮见南邮</title>
-    <link rel="preconnect" href="https://tile.openstreetmap.org" />
-    <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css?v=1" />
-    <link rel="stylesheet" href="styles.css?v=15" />
+    <link rel="stylesheet" href="styles.css?v=16" />
   </head>
   <body data-page="map">
     <header class="site-header">
@@ -30,21 +28,13 @@
             <button type="button" class="active" data-campus-key="xianlin" aria-pressed="true">仙林校区</button>
             <button type="button" data-campus-key="sanpailou" aria-pressed="false">三牌楼校区</button>
           </div>
-          <div class="map-toolbar" aria-label="地图工具">
-            <button type="button" id="reset-map" title="回到当前校区中心"><i data-lucide="locate-fixed"></i><span>校区中心</span></button>
-            <button type="button" id="find-me" title="显示我的位置"><i data-lucide="navigation"></i><span>我的位置</span></button>
-            <button type="button" id="show-transit" title="查看当前校区周边地铁站"><i data-lucide="route"></i><span>周边交通</span></button>
-          </div>
         </div>
-        <div class="map-shell map-shell-large">
-          <div id="campus-map" aria-label="南京邮电大学校区交互地图"></div>
-          <div class="map-load-state" id="map-load-state" role="status" aria-live="polite">
-            <span class="map-loader" aria-hidden="true"></span>
-            <p><strong>地图加载中</strong><span>正在连接底图服务</span></p>
-            <a id="map-fallback-link" href="https://uri.amap.com/search?keyword=%E5%8D%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6%E4%BB%99%E6%9E%97%E6%A0%A1%E5%8C%BA&city=%E5%8D%97%E4%BA%AC&callnative=1" target="_blank" rel="noreferrer">高德地图打开</a>
+        <figure class="campus-map-figure">
+          <div class="campus-image-shell">
+            <img id="campus-map-image" src="assets/map-xianlin.jpg" alt="南京邮电大学仙林校区静态地图，地址：栖霞区文苑路 9 号" width="1280" height="720" decoding="async" />
           </div>
-        </div>
-        <div class="map-meta"><div class="map-status"><span class="status-dot"></span><span id="map-campus-status-text">仙林校区 · 栖霞区文苑路 9 号</span></div></div>
+          <figcaption class="map-meta"><div class="map-status"><span class="status-dot"></span><span id="map-campus-status-text">仙林校区 · 栖霞区文苑路 9 号</span></div></figcaption>
+        </figure>
         <div class="transport-panel" aria-label="校园出行提示">
           <h4>校园出行提示</h4>
           <div class="transport-tips">
@@ -53,7 +43,7 @@
             <p><i data-lucide="train-front"></i><span><strong>公共交通</strong> 地铁 2 号线到站后仍有地面路程，带行李时优先公交或正规打车。</span></p>
           </div>
         </div>
-        <p class="source-note">地图数据来自 OpenStreetMap。站点、校门开放状态和临时交通组织请以出发当天的实时导航及学校通知为准。</p>
+        <p class="source-note">地图图片基于 OpenStreetMap 数据制作。站点、校门开放状态和临时交通组织请以出发当天的学校通知为准。</p>
 
         <section class="travel-guide" aria-labelledby="travel-guide-title">
           <div class="section-heading travel-heading">
@@ -130,8 +120,7 @@
       </section>
     </main>
     <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p><p class="footer-note">学长为爱发电，无任何营销性质。</p></footer>
-    <script src="assets/vendor/leaflet/leaflet.js?v=1"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-    <script src="app.js?v=9" defer></script>
+    <script src="app.js?v=10" defer></script>
   </body>
 </html>

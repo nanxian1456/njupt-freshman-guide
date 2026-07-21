@@ -3,28 +3,15 @@ const CAMPUSES = {
     name: "南京邮电大学仙林校区",
     shortName: "仙林校区",
     address: "栖霞区文苑路 9 号",
-    center: [32.1152716, 118.9259566],
-    zoom: 16,
-    amapQuery: "南京邮电大学仙林校区",
-    transitAnchors: [
-      { name: "仙林中心站", line: "地铁 2 号线", center: [32.1021286, 118.9248065] },
-      { name: "羊山公园站", line: "地铁 2 号线", center: [32.1076347, 118.9380395] },
-    ],
+    image: "assets/map-xianlin.jpg",
   },
   sanpailou: {
     name: "南京邮电大学三牌楼校区",
     shortName: "三牌楼校区",
     address: "鼓楼区新模范马路 66 号",
-    center: [32.0832778, 118.765656],
-    zoom: 16,
-    amapQuery: "南京邮电大学三牌楼校区",
-    transitAnchors: [
-      { name: "新模范马路站", line: "地铁 1 号线", center: [32.0819286, 118.7785505] },
-    ],
+    image: "assets/map-sanpailou.jpg",
   },
 };
-
-const CAMPUS = CAMPUSES.xianlin;
 
 const GUIDE_GROUPS = {
   prepare: { label: "入学准备", icon: "compass", pages: ["map", "dorms", "schedule"] },
@@ -220,7 +207,7 @@ function initNavigation() {
 
 function registerRevealItems(root = document) {
   if (!revealObserver) return;
-  const selector = ".guide-stage, .module-link, .official-links a, .map-shell, .club-card, .catalog-row, .schedule-block, .day-part, .dorm-card, .gallery-item, .food-card, .major-card";
+  const selector = ".guide-stage, .module-link, .official-links a, .campus-image-shell, .club-card, .catalog-row, .schedule-block, .day-part, .dorm-card, .gallery-item, .food-card, .major-card";
   root.querySelectorAll(selector).forEach((element, index) => {
     if (element.classList.contains("reveal-item")) return;
     element.classList.add("reveal-item");
@@ -262,135 +249,26 @@ function initDormSearch() {
   });
 }
 
-function initWelcomeMap() {
-  const container = document.querySelector("#welcome-map");
-  if (!container || !window.L) return;
-  const map = L.map(container, {
-    zoomControl: false,
-    dragging: false,
-    scrollWheelZoom: false,
-    doubleClickZoom: false,
-    boxZoom: false,
-    keyboard: false,
-    tap: false,
-  }).setView(CAMPUS.center, 16);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
-  L.circle(CAMPUS.center, {
-    radius: 175,
-    color: "#f0c94f",
-    weight: 3,
-    fillColor: "#f0c94f",
-    fillOpacity: 0.08,
-  }).addTo(map);
-}
-
-function initMap() {
-  const container = document.querySelector("#campus-map");
-  const loadState = document.querySelector("#map-load-state");
-  if (!container) return;
-  if (!window.L) {
-    loadState?.classList.add("is-error");
-    const title = loadState?.querySelector("strong");
-    const detail = loadState?.querySelector("p span");
-    if (title) title.textContent = "交互地图暂时无法加载";
-    if (detail) detail.textContent = "可使用下方入口继续导航";
-    return;
-  }
-  const map = L.map(container, { zoomControl: false }).setView(CAMPUS.center, CAMPUS.zoom);
-  const tiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    updateWhenIdle: true,
-    keepBuffer: 2,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
-
-  let tileErrors = 0;
-  let mapReady = false;
-  const loadingTimer = window.setTimeout(() => {
-    if (!mapReady) loadState?.classList.add("is-slow");
-  }, 5000);
-  const markMapReady = () => {
-    if (mapReady) return;
-    mapReady = true;
-    window.clearTimeout(loadingTimer);
-    loadState?.classList.add("is-hidden");
-  };
-  tiles.once("tileload", markMapReady);
-  tiles.on("tileerror", () => {
-    tileErrors += 1;
-    if (mapReady || tileErrors < 3) return;
-    loadState?.classList.add("is-error");
-    const title = loadState?.querySelector("strong");
-    const detail = loadState?.querySelector("p span");
-    if (title) title.textContent = "底图连接较慢";
-    if (detail) detail.textContent = "校园位置仍可通过高德地图查看";
-  });
-
-  const refreshMapSize = () => window.setTimeout(() => map.invalidateSize({ pan: false }), 80);
-  refreshMapSize();
-  window.addEventListener("orientationchange", refreshMapSize);
-  if (window.ResizeObserver) new ResizeObserver(refreshMapSize).observe(container);
-
-  L.control.zoom({ position: "bottomleft" }).addTo(map);
-  const campusLayer = L.layerGroup().addTo(map);
+function initCampusImages() {
+  const image = document.querySelector("#campus-map-image");
+  if (!image) return;
   const statusText = document.querySelector("#map-campus-status-text");
-  const fallbackLink = document.querySelector("#map-fallback-link");
   const campusButtons = [...document.querySelectorAll("[data-campus-key]")];
-  let activeCampus = CAMPUS;
-
-  const renderCampus = (campusKey, animate = true) => {
-    activeCampus = CAMPUSES[campusKey] || CAMPUS;
-    campusLayer.clearLayers();
-    L.circle(activeCampus.center, {
-      radius: 160,
-      color: "#187c63",
-      weight: 2,
-      fillColor: "#6fe0a6",
-      fillOpacity: 0.08,
-    }).addTo(campusLayer).bindPopup(`<strong>${activeCampus.name}</strong><br>${activeCampus.address}`);
-    L.marker(activeCampus.center).addTo(campusLayer).bindPopup(`<strong>${activeCampus.name}</strong><br>${activeCampus.address}`);
-    activeCampus.transitAnchors.forEach((station) => L.circleMarker(station.center, {
-      radius: 8,
-      color: "#ffffff",
-      weight: 3,
-      fillColor: "#d9564a",
-      fillOpacity: 1,
-    }).addTo(campusLayer).bindPopup(`<strong>${station.name}</strong><br>${station.line}<br>到校请结合实时接驳路线`));
-
-    if (animate) map.flyTo(activeCampus.center, activeCampus.zoom);
-    else map.setView(activeCampus.center, activeCampus.zoom);
-    if (statusText) statusText.textContent = `${activeCampus.shortName} · ${activeCampus.address}`;
-    if (fallbackLink) {
-      fallbackLink.href = `https://uri.amap.com/search?keyword=${encodeURIComponent(activeCampus.amapQuery)}&city=${encodeURIComponent("南京")}&callnative=1`;
-    }
+  const showCampus = (campusKey) => {
+    const campus = CAMPUSES[campusKey] || CAMPUSES.xianlin;
+    image.classList.add("is-switching");
+    image.src = campus.image;
+    image.alt = `${campus.name}静态地图，地址：${campus.address}`;
+    if (statusText) statusText.textContent = `${campus.shortName} · ${campus.address}`;
     campusButtons.forEach((button) => {
       const selected = button.dataset.campusKey === campusKey;
       button.classList.toggle("active", selected);
       button.setAttribute("aria-pressed", String(selected));
     });
+    image.decode().catch(() => {}).finally(() => image.classList.remove("is-switching"));
   };
 
-  renderCampus("xianlin", false);
-  campusButtons.forEach((button) => button.addEventListener("click", () => renderCampus(button.dataset.campusKey)));
-  document.querySelector("#reset-map")?.addEventListener("click", () => map.flyTo(activeCampus.center, activeCampus.zoom));
-  document.querySelector("#show-transit")?.addEventListener("click", () => {
-    map.fitBounds(L.latLngBounds([activeCampus.center, ...activeCampus.transitAnchors.map((station) => station.center)]), { padding: [36, 36] });
-  });
-  document.querySelector("#find-me")?.addEventListener("click", () => {
-    map.locate({ setView: true, maxZoom: 17 });
-  });
-  map.on("locationfound", (event) => {
-    L.circleMarker(event.latlng, { radius: 8, color: "#3974a8", fillOpacity: 0.9 }).addTo(map).bindPopup("你的位置").openPopup();
-  });
-  map.on("locationerror", () => {
-    window.alert("暂时无法获取位置，请检查浏览器定位权限。");
-  });
-
-  // Expose map for other UI modules (transport panel markers etc.)
-  window.CAMPUS_MAP = map;
+  campusButtons.forEach((button) => button.addEventListener("click", () => showCampus(button.dataset.campusKey)));
 }
 
 async function loadClubs() {
@@ -649,8 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   initMotion();
   initDormSearch();
-  initWelcomeMap();
-  initMap();
+  initCampusImages();
   updateRunStatus();
   initGallery();
   loadClubs();
