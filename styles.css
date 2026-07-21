@@ -419,6 +419,7 @@ body.page-enter .module-hero h1, body.page-enter .welcome-content { animation: p
 }
 
 footer { max-width: var(--max-width); min-height: 110px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 30px; color: var(--muted); font-size: 12px; }
+footer .footer-note { font-size: 11px; opacity: 0.82; }
 
 @media (max-width: 900px) {
   body { padding-bottom: 82px; }
