@@ -49,6 +49,40 @@ function renderComment(container, comment) {
   container.append(article);
 }
 
+function replaceTargetOptions(select, targets) {
+  if (!Array.isArray(targets) || !targets.length) return;
+  const selectedKey = select.value;
+  const groups = new Map();
+  targets.forEach((target) => {
+    const groupName = target.groupName || "其他";
+    if (!groups.has(groupName)) groups.set(groupName, []);
+    groups.get(groupName).push(target);
+  });
+  select.replaceChildren();
+  groups.forEach((items, groupName) => {
+    const group = document.createElement("optgroup");
+    group.label = groupName;
+    items.forEach((target) => {
+      const option = commentElement("option", "", target.name);
+      option.value = target.targetKey;
+      group.append(option);
+    });
+    select.append(group);
+  });
+  if (targets.some((target) => target.targetKey === selectedKey)) {
+    select.value = selectedKey;
+  }
+}
+
+async function loadCommentTargets(targetType, select) {
+  try {
+    const result = await commentRequest(`/api/catalog?type=${encodeURIComponent(targetType)}`);
+    replaceTargetOptions(select, result.targets);
+  } catch {
+    // The static options remain available when the catalog API is offline.
+  }
+}
+
 function initCommentWidget(widget) {
   const targetType = widget.dataset.targetType;
   const targetSelect = widget.querySelector("[data-comment-target]");
@@ -131,7 +165,7 @@ function initCommentWidget(widget) {
     }
   });
 
-  loadComments(true);
+  loadCommentTargets(targetType, targetSelect).then(() => loadComments(true));
   refreshToken();
 }
 

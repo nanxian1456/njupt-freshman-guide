@@ -11,6 +11,7 @@ import cn.xszn.comments.model.TargetType;
 import cn.xszn.comments.repository.CommentRepository;
 import java.text.Normalizer;
 import java.time.Duration;
+import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,16 +24,19 @@ public class CommentService {
   private final TargetCatalog targetCatalog;
   private final HmacService hmacService;
   private final CommentRateLimiter rateLimiter;
+  private final AdminOperationLogService operationLogService;
 
   public CommentService(
       CommentRepository repository,
       TargetCatalog targetCatalog,
       HmacService hmacService,
-      CommentRateLimiter rateLimiter) {
+      CommentRateLimiter rateLimiter,
+      AdminOperationLogService operationLogService) {
     this.repository = repository;
     this.targetCatalog = targetCatalog;
     this.hmacService = hmacService;
     this.rateLimiter = rateLimiter;
+    this.operationLogService = operationLogService;
   }
 
   @Transactional(readOnly = true)
@@ -75,23 +79,74 @@ public class CommentService {
         CommentStatus.PENDING, PageRequest.of(safePage, ADMIN_PAGE_SIZE));
     var comments = result.getContent().stream()
         .map(comment -> CommentResponse.from(
-            comment, targetCatalog.requireName(comment.getTargetType(), comment.getTargetKey()), true))
+            comment, targetCatalog.displayName(comment.getTargetType(), comment.getTargetKey()), true))
+        .toList();
+    return new CommentPageResponse(comments, safePage, result.hasNext());
+  }
+
+  @Transactional(readOnly = true)
+  public CommentPageResponse getManaged(int page) {
+    int safePage = Math.max(0, Math.min(page, 1000));
+    var result = repository.findByStatusInOrderByReviewedAtDescIdDesc(
+        List.of(CommentStatus.APPROVED, CommentStatus.WITHDRAWN),
+        PageRequest.of(safePage, ADMIN_PAGE_SIZE));
+    var comments = result.getContent().stream()
+        .map(comment -> CommentResponse.from(
+            comment, targetCatalog.displayName(comment.getTargetType(), comment.getTargetKey()), true))
         .toList();
     return new CommentPageResponse(comments, safePage, result.hasNext());
   }
 
   @Transactional
-  public CommentResponse moderate(long id, ModerationAction action) {
+  public CommentResponse moderate(long id, ModerationAction action, String confirmation) {
     Comment comment = repository.findById(id)
         .orElseThrow(() -> new InvalidCommentException("评价不存在"));
-    if (comment.getStatus() != CommentStatus.PENDING) {
-      throw new InvalidCommentException("该评价已经处理");
-    }
-    comment.moderate(action == ModerationAction.APPROVE
-        ? CommentStatus.APPROVED
-        : CommentStatus.REJECTED);
+    CommentStatus before = comment.getStatus();
+    CommentStatus next = switch (action) {
+      case APPROVE -> requireTransition(before, CommentStatus.PENDING, CommentStatus.APPROVED);
+      case REJECT -> requireTransition(before, CommentStatus.PENDING, CommentStatus.REJECTED);
+      case WITHDRAW -> {
+        requireConfirmation(confirmation, "WITHDRAW:" + id);
+        yield requireTransition(before, CommentStatus.APPROVED, CommentStatus.WITHDRAWN);
+      }
+      case REPUBLISH -> {
+        requireConfirmation(confirmation, "REPUBLISH:" + id);
+        yield requireTransition(before, CommentStatus.WITHDRAWN, CommentStatus.APPROVED);
+      }
+    };
+    comment.moderate(next);
+    operationLogService.recordComment("COMMENT_" + action, comment, before, next);
     return CommentResponse.from(
-        comment, targetCatalog.requireName(comment.getTargetType(), comment.getTargetKey()), true);
+        comment, targetCatalog.displayName(comment.getTargetType(), comment.getTargetKey()), true);
+  }
+
+  @Transactional
+  public void deleteManaged(long id, String confirmation) {
+    requireConfirmation(confirmation, Long.toString(id));
+    Comment comment = repository.findById(id)
+        .orElseThrow(() -> new InvalidCommentException("评价不存在"));
+    CommentStatus before = comment.getStatus();
+    if (before != CommentStatus.APPROVED && before != CommentStatus.WITHDRAWN) {
+      throw new InvalidCommentException("只能永久删除已发布或已撤回的评价");
+    }
+    operationLogService.recordComment("COMMENT_DELETE", comment, before, null);
+    repository.delete(comment);
+  }
+
+  private CommentStatus requireTransition(
+      CommentStatus current,
+      CommentStatus required,
+      CommentStatus next) {
+    if (current != required) {
+      throw new InvalidCommentException("当前评价状态不允许执行该操作");
+    }
+    return next;
+  }
+
+  private void requireConfirmation(String actual, String expected) {
+    if (!expected.equals(actual)) {
+      throw new InvalidCommentException("二次确认信息不正确");
+    }
   }
 
   private String normalize(String value) {

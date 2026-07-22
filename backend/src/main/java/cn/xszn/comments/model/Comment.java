@@ -67,4 +67,5 @@ public class Comment {
   public String getContent() { return content; }
   public CommentStatus getStatus() { return status; }
   public LocalDateTime getCreatedAt() { return createdAt; }
+  public LocalDateTime getReviewedAt() { return reviewedAt; }
 }

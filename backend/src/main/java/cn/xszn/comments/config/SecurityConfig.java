@@ -22,7 +22,7 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/admin/**").hasRole("ADMIN")
-            .requestMatchers("/api/comments/**", "/api/health").permitAll()
+            .requestMatchers("/api/comments/**", "/api/catalog/**", "/api/health").permitAll()
             .anyRequest().denyAll())
         .addFilterBefore(sameOriginFilter, UsernamePasswordAuthenticationFilter.class)
         .addFilterAfter(adminTokenFilter, SameOriginFilter.class)

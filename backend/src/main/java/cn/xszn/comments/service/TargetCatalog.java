@@ -1,41 +1,84 @@
 package cn.xszn.comments.service;
 
+import cn.xszn.comments.dto.TargetCatalogEntryResponse;
+import cn.xszn.comments.dto.UpdateTargetCatalogRequest;
 import cn.xszn.comments.model.TargetType;
-import java.util.Map;
+import cn.xszn.comments.repository.TargetCatalogRepository;
+import java.text.Normalizer;
+import java.util.List;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class TargetCatalog {
-  private static final Map<String, String> DORMS = Map.ofEntries(
-      Map.entry("lanyuan", "兰苑"),
-      Map.entry("meiyuan", "梅苑"),
-      Map.entry("zhuyuan", "竹苑"),
-      Map.entry("juyuan", "菊苑"),
-      Map.entry("taoyuan", "桃苑"),
-      Map.entry("liyuan", "李苑"),
-      Map.entry("liuyuan", "柳苑"),
-      Map.entry("guiyuan", "桂苑"),
-      Map.entry("nanhe", "南荷"),
-      Map.entry("beihe", "北荷"),
-      Map.entry("yingyuan", "樱苑"),
-      Map.entry("qingjiao", "青教"));
+  private final TargetCatalogRepository repository;
+  private final AdminOperationLogService operationLogService;
 
-  private static final Map<String, String> FOODS = Map.ofEntries(
-      Map.entry("xianlin-canteen-1", "仙林一食堂"),
-      Map.entry("xianlin-canteen-2", "仙林二食堂"),
-      Map.entry("xianlin-canteen-3", "仙林三食堂"),
-      Map.entry("xianlin-outside", "仙林校外美食"),
-      Map.entry("sanpailou-canteen", "三牌楼学生食堂"),
-      Map.entry("sanpailou-outside", "三牌楼周边餐饮"));
+  public TargetCatalog(
+      TargetCatalogRepository repository,
+      AdminOperationLogService operationLogService) {
+    this.repository = repository;
+    this.operationLogService = operationLogService;
+  }
 
+  @Transactional(readOnly = true)
   public String requireName(TargetType type, String key) {
-    String name = switch (type) {
-      case DORM -> DORMS.get(key);
-      case FOOD -> FOODS.get(key);
-    };
-    if (name == null) {
-      throw new InvalidCommentException("评价对象不存在");
+    var entry = repository.findByTargetTypeAndTargetKey(type, key)
+        .filter(item -> item.isEnabled())
+        .orElseThrow(() -> new InvalidCommentException("评价对象不存在或已停用"));
+    return entry.getName();
+  }
+
+  @Transactional(readOnly = true)
+  public String displayName(TargetType type, String key) {
+    return repository.findByTargetTypeAndTargetKey(type, key)
+        .map(item -> item.getName())
+        .orElse(key);
+  }
+
+  @Transactional(readOnly = true)
+  public List<TargetCatalogEntryResponse> listPublic(TargetType type) {
+    return repository.findByTargetTypeAndEnabledTrueOrderBySortOrderAscTargetKeyAsc(type).stream()
+        .map(TargetCatalogEntryResponse::from)
+        .toList();
+  }
+
+  @Transactional(readOnly = true)
+  public List<TargetCatalogEntryResponse> listAdmin() {
+    return repository.findAllByOrderByTargetTypeAscSortOrderAscTargetKeyAsc().stream()
+        .map(TargetCatalogEntryResponse::from)
+        .toList();
+  }
+
+  @Transactional
+  public TargetCatalogEntryResponse update(
+      TargetType type,
+      String key,
+      UpdateTargetCatalogRequest request) {
+    var entry = repository.findByTargetTypeAndTargetKey(type, key)
+        .orElseThrow(() -> new InvalidCommentException("目录项目不存在"));
+    String name = normalize(request.name());
+    String groupName = normalize(request.groupName());
+    if (name.isBlank() || groupName.isBlank()) {
+      throw new InvalidCommentException("名称和分组不能为空");
     }
-    return name;
+    String before = entry.getName() + " / " + entry.getGroupName()
+        + " / " + entry.getSortOrder() + " / " + entry.isEnabled();
+    entry.update(name, groupName, request.sortOrder(), request.enabled());
+    operationLogService.record(
+        "CATALOG_UPDATE",
+        "TARGET",
+        type + ":" + key,
+        before + " -> " + name + " / " + groupName
+            + " / " + request.sortOrder() + " / " + request.enabled());
+    return TargetCatalogEntryResponse.from(entry);
+  }
+
+  private String normalize(String value) {
+    if (value == null) return "";
+    return Normalizer.normalize(value, Normalizer.Form.NFKC)
+        .replaceAll("[\\p{Cc}]", "")
+        .replaceAll("\\s+", " ")
+        .trim();
   }
 }

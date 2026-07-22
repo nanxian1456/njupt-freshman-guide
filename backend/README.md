@@ -27,8 +27,13 @@ mvn clean test package
 - `GET /api/comments/form-token`: short-lived signed form token.
 - `GET /api/comments`: approved comments for a whitelisted target.
 - `POST /api/comments`: rate-limited submission, always pending moderation.
+- `GET /api/catalog`: enabled dormitory or dining targets for the public selector.
 - `GET /api/admin/comments`: pending comments; requires `X-Admin-Token`.
-- `PATCH /api/admin/comments/{id}`: approve or reject; requires `X-Admin-Token`.
+- `GET /api/admin/comments/managed`: approved and withdrawn comments.
+- `PATCH /api/admin/comments/{id}`: approve, reject, withdraw, or republish.
+- `DELETE /api/admin/comments/{id}`: permanently delete a managed comment; requires matching confirmation header.
+- `GET/PATCH /api/admin/catalog`: list or update target names, groups, order, and enabled state.
+- `GET /api/admin/operations`: recent immutable administrator operation records.
 - `GET /api/health`: verifies database connectivity.
 
 Raw IP addresses are never stored. The browser renders all submitted content with `textContent`, not HTML.

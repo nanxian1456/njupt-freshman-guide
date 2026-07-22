@@ -4,27 +4,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex,nofollow,noarchive" />
-    <title>评价审核 · 邮见南邮</title>
-    <link rel="stylesheet" href="styles.css?v=19" />
+    <title>评价管理 · 邮见南邮</title>
+    <link rel="stylesheet" href="styles.css?v=21" />
   </head>
   <body data-page="admin-comments">
     <header class="site-header">
-      <a class="brand" href="index.html" aria-label="返回首页"><span class="brand-mark">邮</span><span><strong>邮见南邮</strong><small>评价审核</small></span></a>
+      <a class="brand" href="index.html" aria-label="返回首页"><span class="brand-mark">邮</span><span><strong>邮见南邮</strong><small>评价管理</small></span></a>
     </header>
     <main class="admin-comment-main">
       <div class="admin-comment-heading">
-        <div><p class="section-index">MODERATION</p><h1>匿名评价审核</h1></div>
-        <p>管理员令牌只保存在当前页面内存中，关闭页面后自动清除。审核时只显示评价内容，不显示网络标识。</p>
+        <div><p class="section-index">ADMIN CONSOLE</p><h1>评价与目录管理</h1></div>
+        <p>审核、撤回和目录调整统一记录。管理员令牌只保存在当前页面内存中，关闭页面后自动清除。</p>
       </div>
       <form class="admin-token-form" id="admin-token-form">
         <label class="sr-only" for="admin-token">管理员令牌</label>
         <input id="admin-token" name="token" type="password" minlength="32" required autocomplete="off" placeholder="输入管理员令牌" />
-        <button type="submit">读取待审核评价</button>
+        <button type="submit"><i data-lucide="key-round"></i><span>进入管理后台</span></button>
       </form>
-      <p class="admin-status" id="admin-status" aria-live="polite">尚未连接审核接口。</p>
-      <div class="admin-comment-list" id="admin-comment-list" aria-live="polite"></div>
+      <p class="admin-status" id="admin-status" aria-live="polite">尚未连接管理接口。</p>
+
+      <section class="admin-workspace" id="admin-workspace" hidden>
+        <nav class="admin-view-tabs" aria-label="管理视图">
+          <button type="button" class="active" data-admin-view="pending"><i data-lucide="inbox"></i><span>待审核</span></button>
+          <button type="button" data-admin-view="managed"><i data-lucide="message-square"></i><span>已发布评论</span></button>
+          <button type="button" data-admin-view="catalog"><i data-lucide="list-tree"></i><span>目录管理</span></button>
+          <button type="button" data-admin-view="operations"><i data-lucide="history"></i><span>操作记录</span></button>
+        </nav>
+
+        <section class="admin-view-panel active" data-admin-panel="pending" aria-labelledby="admin-pending-title">
+          <header><div><p class="section-index">PENDING</p><h2 id="admin-pending-title">待审核评价</h2></div><button type="button" class="admin-refresh-button" data-admin-refresh><i data-lucide="refresh-cw"></i><span>刷新</span></button></header>
+          <div class="admin-comment-list" id="admin-pending-list" aria-live="polite"></div>
+        </section>
+
+        <section class="admin-view-panel" data-admin-panel="managed" aria-labelledby="admin-managed-title" hidden>
+          <header><div><p class="section-index">PUBLISHED</p><h2 id="admin-managed-title">已发布与已撤回</h2></div><button type="button" class="admin-refresh-button" data-admin-refresh><i data-lucide="refresh-cw"></i><span>刷新</span></button></header>
+          <div class="admin-comment-list" id="admin-managed-list" aria-live="polite"></div>
+        </section>
+
+        <section class="admin-view-panel" data-admin-panel="catalog" aria-labelledby="admin-catalog-title" hidden>
+          <header><div><p class="section-index">CATALOG</p><h2 id="admin-catalog-title">宿舍与食堂目录</h2></div><button type="button" class="admin-refresh-button" data-admin-refresh><i data-lucide="refresh-cw"></i><span>刷新</span></button></header>
+          <div class="admin-catalog-list" id="admin-catalog-list" aria-live="polite"></div>
+        </section>
+
+        <section class="admin-view-panel" data-admin-panel="operations" aria-labelledby="admin-operations-title" hidden>
+          <header><div><p class="section-index">AUDIT LOG</p><h2 id="admin-operations-title">管理员操作记录</h2></div><button type="button" class="admin-refresh-button" data-admin-refresh><i data-lucide="refresh-cw"></i><span>刷新</span></button></header>
+          <div class="admin-operation-list" id="admin-operation-list" aria-live="polite"></div>
+        </section>
+      </section>
     </main>
+
+    <dialog class="admin-confirm-dialog" id="admin-confirm-dialog">
+      <form id="admin-confirm-form">
+        <div class="admin-confirm-icon"><i data-lucide="alert-triangle"></i></div>
+        <div><p class="section-index">SECOND CONFIRMATION</p><h2 id="admin-confirm-title">确认操作</h2></div>
+        <p id="admin-confirm-message"></p>
+        <label class="admin-confirm-input-wrap" id="admin-confirm-input-wrap" hidden>
+          <span>输入确认文字</span>
+          <input id="admin-confirm-input" type="text" autocomplete="off" />
+          <small id="admin-confirm-hint"></small>
+        </label>
+        <p class="admin-confirm-error" id="admin-confirm-error" aria-live="polite"></p>
+        <div class="admin-confirm-actions">
+          <button type="button" id="admin-confirm-cancel">取消</button>
+          <button type="submit" id="admin-confirm-submit">确认</button>
+        </div>
+      </form>
+    </dialog>
+
     <footer><p>邮见南邮 · 管理入口</p><p>请勿共享管理员令牌。</p></footer>
-    <script src="admin-comments.js?v=1" defer></script>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="admin-comments.js?v=2" defer></script>
   </body>
 </html>

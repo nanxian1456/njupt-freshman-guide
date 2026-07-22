@@ -18,7 +18,9 @@ class CommentServiceRateLimitTest {
     TargetCatalog targetCatalog = mock(TargetCatalog.class);
     HmacService hmacService = mock(HmacService.class);
     CommentRateLimiter rateLimiter = mock(CommentRateLimiter.class);
-    CommentService service = new CommentService(repository, targetCatalog, hmacService, rateLimiter);
+    AdminOperationLogService operationLogService = mock(AdminOperationLogService.class);
+    CommentService service = new CommentService(
+        repository, targetCatalog, hmacService, rateLimiter, operationLogService);
 
     when(hmacService.hashIp("203.0.113.10")).thenReturn("ip-hash");
     when(hmacService.hashIdentifier("client:203.0.113.10|browser-session-id"))
