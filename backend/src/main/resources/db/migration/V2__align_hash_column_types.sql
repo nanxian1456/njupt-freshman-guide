@@ -1,0 +1,5 @@
+ALTER TABLE comments
+  MODIFY COLUMN ip_hash VARCHAR(64) NOT NULL;
+
+ALTER TABLE comment_rate_limits
+  MODIFY COLUMN ip_hash VARCHAR(64) NOT NULL;
