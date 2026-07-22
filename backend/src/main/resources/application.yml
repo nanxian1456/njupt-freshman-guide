@@ -1,0 +1,51 @@
+server:
+  address: 127.0.0.1
+  port: ${SERVER_PORT:8080}
+  forward-headers-strategy: native
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+  tomcat:
+    max-http-form-post-size: 8KB
+    max-swallow-size: 8KB
+
+spring:
+  application:
+    name: xszn-comments
+  datasource:
+    url: ${DB_URL:jdbc:mysql://127.0.0.1:3306/xszn_comments?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=false}
+    username: ${DB_USERNAME:xszn_app}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 8
+      minimum-idle: 1
+      connection-timeout: 5000
+      validation-timeout: 2000
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Shanghai
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    user: ${DB_MIGRATION_USERNAME:xszn_migrator}
+    password: ${DB_MIGRATION_PASSWORD}
+  jackson:
+    default-property-inclusion: non_null
+
+comments:
+  admin-token: ${COMMENT_ADMIN_TOKEN}
+  ip-hmac-secret: ${COMMENT_IP_HMAC_SECRET}
+  form-hmac-secret: ${COMMENT_FORM_HMAC_SECRET}
+  allowed-origins: ${COMMENT_ALLOWED_ORIGINS:https://www.xszn-ny.cn,https://xszn-ny.cn}
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: WARN
+    org.springframework.security: WARN

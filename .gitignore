@@ -4,3 +4,4 @@ Desktop.ini
 *.log
 .idea/
 .vscode/
+backend/target/

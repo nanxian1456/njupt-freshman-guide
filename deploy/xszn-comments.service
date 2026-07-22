@@ -1,0 +1,29 @@
+[Unit]
+Description=NJUPT freshman guide moderated comments API
+After=network-online.target mysql.service
+Wants=network-online.target
+Requires=mysql.service
+
+[Service]
+Type=simple
+User=xszn-comments
+Group=xszn-comments
+WorkingDirectory=/opt/xszn-comments
+EnvironmentFile=/etc/xszn-comments.env
+ExecStart=/usr/bin/java -Xms64m -Xmx256m -XX:+ExitOnOutOfMemoryError -jar /opt/xszn-comments/xszn-comments.jar
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=143
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

@@ -6,7 +6,7 @@
     <meta name="description" content="南邮新生美食探索，从校园一日三餐开始认识南邮。" />
     <title>我品过的南邮 · 南邮美食</title>
     <link rel="preconnect" href="https://unpkg.com" />
-    <link rel="stylesheet" href="styles.css?v=18" />
+    <link rel="stylesheet" href="styles.css?v=19" />
   </head>
   <body data-page="food">
     <header class="site-header">
@@ -48,12 +48,38 @@
           <article class="food-card food-card-updating"><i data-lucide="store"></i><small>校区周边</small><h2>三牌楼周边餐饮</h2><ul class="food-items"><li>适合同学聚餐的店铺：后续更新</li><li>平价快餐与夜间加餐：后续更新</li><li>营业时间请以店铺当日信息为准</li></ul><span class="food-update-badge">后续更新</span></article>
         </div>
         <p class="food-note">美食评价栏目正在收集同学们的真实体验，后续会持续更新。</p>
-
-
+        <section class="community-comments" data-comment-widget data-target-type="FOOD" aria-labelledby="food-comments-title">
+          <div class="content-heading comment-heading">
+            <div><p class="section-index">ANONYMOUS COMMENTS</p><h2 id="food-comments-title">匿名食堂评价</h2></div>
+            <p>选择食堂查看已通过审核的评价，或分享菜品、价格和排队体验。请勿填写姓名、联系方式等个人信息。</p>
+          </div>
+          <div class="comment-layout">
+            <div class="comment-feed">
+              <label class="comment-target-label" for="food-comment-target">正在查看</label>
+              <div class="comment-select-wrap"><i data-lucide="utensils"></i><select id="food-comment-target" data-comment-target>
+                <option value="xianlin-canteen-1">仙林一食堂</option><option value="xianlin-canteen-2">仙林二食堂</option><option value="xianlin-canteen-3">仙林三食堂</option>
+                <option value="xianlin-outside">仙林校外美食</option><option value="sanpailou-canteen">三牌楼学生食堂</option><option value="sanpailou-outside">三牌楼周边餐饮</option>
+              </select><i data-lucide="chevron-down"></i></div>
+              <div class="comment-list" data-comment-list aria-live="polite"><p class="comment-state">正在加载评价...</p></div>
+              <button class="secondary-button comment-more" type="button" data-comment-more hidden><i data-lucide="chevrons-down"></i>查看更多</button>
+            </div>
+            <form class="comment-form" data-comment-form>
+              <div class="comment-form-heading"><i data-lucide="message-square-plus"></i><div><h3>写下真实体验</h3><p>所有评价均需人工审核后公开</p></div></div>
+              <label><span>昵称 <small>选填</small></span><input name="nickname" type="text" maxlength="20" autocomplete="nickname" placeholder="默认显示为匿名同学" /></label>
+              <label><span>评价内容 <small data-comment-count>0 / 300</small></span><textarea name="content" minlength="5" maxlength="300" rows="6" required placeholder="可以写推荐菜、价格、分量、排队和用餐体验"></textarea></label>
+              <label class="comment-honeypot" aria-hidden="true">网站<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+              <label class="comment-consent"><input type="checkbox" required /><span>我确认内容不含个人信息、广告或人身攻击。</span></label>
+              <button class="primary-comment-button" type="submit" disabled><i data-lucide="send"></i><span>提交审核</span></button>
+              <p class="comment-submit-status" data-comment-submit-status aria-live="polite">正在准备安全表单...</p>
+            </form>
+          </div>
+          <p class="comment-privacy"><i data-lucide="shield-check"></i>页面不公开身份信息；系统仅保存不可逆的网络标识，用于限制恶意刷评。</p>
+        </section>
       </section>
     </main>
     <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p><p class="footer-note">学长为爱发电，无任何营销性质。</p></footer>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     <script src="app.js?v=7" defer></script>
+    <script src="comments.js?v=1" defer></script>
   </body>
 </html>

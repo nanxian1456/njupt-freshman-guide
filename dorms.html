@@ -6,7 +6,7 @@
     <meta name="description" content="南京邮电大学仙林校区宿舍片区名录与评价入口。" />
     <title>宿舍评价 · 邮见南邮</title>
     <link rel="preconnect" href="https://unpkg.com" />
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <link rel="stylesheet" href="styles.css?v=19" />
   </head>
   <body data-page="dorms">
     <header class="site-header">
@@ -45,6 +45,34 @@
           <article class="dorm-card" data-dorm="青教 公寓式 电热水器 青年教师公寓 改造"><span class="dorm-index">12</span><i data-lucide="building-2"></i><h2>青教</h2><span class="review-badge apartment">公寓式住宿</span><div class="dorm-facts"><span>住宅式格局</span><span>部分独立电热水器</span></div><p>由青年教师公寓改造，格局更接近普通住宅，部分房间使用独立电热水器，配置差异较大。</p><ul class="dorm-review"><li><strong>优点</strong>公寓式生活感更强，独立热水配置较便利。</li><li><strong>注意</strong>不同房间差异明显，新生是否入住看当年分配。</li></ul></article>
         </div>
         <div class="empty-state dorm-empty" id="dorm-empty" hidden><i data-lucide="search-x"></i><p>没有找到匹配的宿舍。</p></div>
+        <section class="community-comments" data-comment-widget data-target-type="DORM" aria-labelledby="dorm-comments-title">
+          <div class="content-heading comment-heading">
+            <div><p class="section-index">ANONYMOUS COMMENTS</p><h2 id="dorm-comments-title">匿名宿舍评价</h2></div>
+            <p>选择苑区查看已通过审核的评价，或提交自己的真实体验。请勿填写姓名、联系方式、寝室号等个人信息。</p>
+          </div>
+          <div class="comment-layout">
+            <div class="comment-feed">
+              <label class="comment-target-label" for="dorm-comment-target">正在查看</label>
+              <div class="comment-select-wrap"><i data-lucide="building-2"></i><select id="dorm-comment-target" data-comment-target>
+                <option value="lanyuan">兰苑</option><option value="meiyuan">梅苑</option><option value="zhuyuan">竹苑</option><option value="juyuan">菊苑</option>
+                <option value="taoyuan">桃苑</option><option value="liyuan">李苑</option><option value="liuyuan">柳苑</option><option value="guiyuan">桂苑</option>
+                <option value="nanhe">南荷</option><option value="beihe">北荷</option><option value="yingyuan">樱苑</option><option value="qingjiao">青教</option>
+              </select><i data-lucide="chevron-down"></i></div>
+              <div class="comment-list" data-comment-list aria-live="polite"><p class="comment-state">正在加载评价...</p></div>
+              <button class="secondary-button comment-more" type="button" data-comment-more hidden><i data-lucide="chevrons-down"></i>查看更多</button>
+            </div>
+            <form class="comment-form" data-comment-form>
+              <div class="comment-form-heading"><i data-lucide="message-square-plus"></i><div><h3>写下真实体验</h3><p>所有评价均需人工审核后公开</p></div></div>
+              <label><span>昵称 <small>选填</small></span><input name="nickname" type="text" maxlength="20" autocomplete="nickname" placeholder="默认显示为匿名同学" /></label>
+              <label><span>评价内容 <small data-comment-count>0 / 300</small></span><textarea name="content" minlength="5" maxlength="300" rows="6" required placeholder="可以写房型、设施、通勤感受和入住建议"></textarea></label>
+              <label class="comment-honeypot" aria-hidden="true">网站<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+              <label class="comment-consent"><input type="checkbox" required /><span>我确认内容不含个人信息、广告或人身攻击。</span></label>
+              <button class="primary-comment-button" type="submit" disabled><i data-lucide="send"></i><span>提交审核</span></button>
+              <p class="comment-submit-status" data-comment-submit-status aria-live="polite">正在准备安全表单...</p>
+            </form>
+          </div>
+          <p class="comment-privacy"><i data-lucide="shield-check"></i>页面不公开身份信息；系统仅保存不可逆的网络标识，用于限制恶意刷评。</p>
+        </section>
         <div class="dorm-sources">
           <div><p class="section-index">SOURCES · 2026-07-20</p><h2>资料来源与使用说明</h2></div>
           <p>设施信息结合学校改造资料和公开宿舍指南整理；“优点 / 注意”属于基于房型与共用空间的概括，不代表每位住户体验。</p>
@@ -60,5 +88,6 @@
     <footer><p>邮见南邮 · 为南邮新生整理</p><p>非学校官方平台，重要信息请以南京邮电大学官方通知为准。</p><p class="footer-note">学长为爱发电，无任何营销性质。</p></footer>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     <script src="app.js?v=7" defer></script>
+    <script src="comments.js?v=1" defer></script>
   </body>
 </html>

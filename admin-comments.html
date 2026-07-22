@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <title>评价审核 · 邮见南邮</title>
+    <link rel="stylesheet" href="styles.css?v=19" />
+  </head>
+  <body data-page="admin-comments">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="返回首页"><span class="brand-mark">邮</span><span><strong>邮见南邮</strong><small>评价审核</small></span></a>
+    </header>
+    <main class="admin-comment-main">
+      <div class="admin-comment-heading">
+        <div><p class="section-index">MODERATION</p><h1>匿名评价审核</h1></div>
+        <p>管理员令牌只保存在当前页面内存中，关闭页面后自动清除。审核时只显示评价内容，不显示网络标识。</p>
+      </div>
+      <form class="admin-token-form" id="admin-token-form">
+        <label class="sr-only" for="admin-token">管理员令牌</label>
+        <input id="admin-token" name="token" type="password" minlength="32" required autocomplete="off" placeholder="输入管理员令牌" />
+        <button type="submit">读取待审核评价</button>
+      </form>
+      <p class="admin-status" id="admin-status" aria-live="polite">尚未连接审核接口。</p>
+      <div class="admin-comment-list" id="admin-comment-list" aria-live="polite"></div>
+    </main>
+    <footer><p>邮见南邮 · 管理入口</p><p>请勿共享管理员令牌。</p></footer>
+    <script src="admin-comments.js?v=1" defer></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+[Unit]
+Description=Back up the NJUPT freshman guide comments database
+After=mysql.service
+Requires=mysql.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/xszn-comments-backup
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/backups/xszn-comments
