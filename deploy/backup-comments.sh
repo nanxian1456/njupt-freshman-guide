@@ -12,6 +12,7 @@ mysqldump \
   --defaults-extra-file=/etc/xszn-comments-backup.cnf \
   --single-transaction \
   --skip-lock-tables \
+  --no-tablespaces \
   --set-gtid-purged=OFF \
   xszn_comments | gzip -9 > "$temporary_file"
 mv "$temporary_file" "$final_file"
