@@ -74,6 +74,7 @@ function initSiteGuide() {
   const header = document.querySelector(".site-header");
   const mainNav = document.querySelector(".main-nav");
   if (!header || !mainNav) return;
+  const currentPage = document.body.dataset.page;
 
   if (!mainNav.querySelector('[data-nav="majors"]')) {
     const majorLink = document.createElement("a");
@@ -83,12 +84,20 @@ function initSiteGuide() {
     mainNav.appendChild(majorLink);
   }
 
+  if (!mainNav.querySelector('[data-nav="about"]')) {
+    const aboutLink = document.createElement("a");
+    aboutLink.href = "about.html";
+    aboutLink.dataset.nav = "about";
+    aboutLink.innerHTML = '<i data-lucide="info"></i><span>关于本站</span>';
+    mainNav.appendChild(aboutLink);
+  }
+
   const primaryNav = document.createElement("nav");
   primaryNav.className = "guide-primary-nav";
   primaryNav.setAttribute("aria-label", "指南分类");
   primaryNav.innerHTML = Object.entries(GUIDE_GROUPS).map(([key, group]) =>
     `<a href="index.html#${key}"><span>${group.label}</span><small>${String(group.pages.length).padStart(2, "0")}</small></a>`
-  ).join("");
+  ).join("") + `<a class="guide-about-tab${currentPage === "about" ? " active" : ""}" href="about.html"${currentPage === "about" ? ' aria-current="page"' : ""}><span>关于本站</span><small>ABOUT</small></a>`;
   header.insertBefore(primaryNav, mainNav);
 
   const headerTools = document.createElement("div");
@@ -108,6 +117,7 @@ function initSiteGuide() {
       <label class="guide-search-box"><i data-lucide="search"></i><span class="sr-only">搜索指南</span><input type="search" placeholder="搜索地图、宿舍、社团或竞赛" autocomplete="off" /></label>
       <div class="guide-search-results">
         ${GUIDE_MODULES.map((module, index) => `<a href="${module.href}" data-search-text="${module.title} ${module.nav} ${module.detail} ${GUIDE_GROUPS[module.group].label}"><span>${String(index + 1).padStart(2, "0")}</span><i data-lucide="${module.icon}"></i><div><strong>${module.title}</strong><small>${module.detail}</small></div><i data-lucide="arrow-up-right"></i></a>`).join("")}
+        <a href="about.html" data-search-text="关于本站 开发者 南邮老生 网站更新 抖音"><span>09</span><i data-lucide="info"></i><div><strong>关于本站</strong><small>开发者与更新说明</small></div><i data-lucide="arrow-up-right"></i></a>
       </div>
       <p class="guide-search-empty" hidden>没有找到匹配的内容。</p>
     </div>`;
@@ -143,7 +153,6 @@ function initSiteGuide() {
     }
   });
 
-  const currentPage = document.body.dataset.page;
   const currentModule = GUIDE_MODULES.find((module) => module.page === currentPage);
   if (currentModule) {
     const group = GUIDE_GROUPS[currentModule.group];
@@ -157,6 +166,14 @@ function initSiteGuide() {
         </nav>
       </div>`;
     document.querySelector("main").before(context);
+  }
+
+  const siteFooter = document.querySelector("body > footer");
+  if (siteFooter && currentPage !== "admin-comments" && !siteFooter.querySelector(".footer-about-link")) {
+    const footerLinks = document.createElement("p");
+    footerLinks.className = "footer-links";
+    footerLinks.innerHTML = '<a class="footer-about-link" href="about.html">关于本站 <i data-lucide="arrow-up-right"></i></a>';
+    siteFooter.appendChild(footerLinks);
   }
 
   window.lucide?.createIcons();
@@ -207,7 +224,7 @@ function initNavigation() {
 
 function registerRevealItems(root = document) {
   if (!revealObserver) return;
-  const selector = ".guide-stage, .module-link, .official-links a, .campus-image-shell, .club-card, .catalog-row, .schedule-block, .day-part, .dorm-card, .gallery-item, .food-card, .major-card";
+  const selector = ".guide-stage, .module-link, .official-links a, .campus-image-shell, .club-card, .catalog-row, .schedule-block, .day-part, .dorm-card, .gallery-item, .food-card, .major-card, .about-letter-index, .about-letter-copy, .about-update-list p";
   root.querySelectorAll(selector).forEach((element, index) => {
     if (element.classList.contains("reveal-item")) return;
     element.classList.add("reveal-item");
