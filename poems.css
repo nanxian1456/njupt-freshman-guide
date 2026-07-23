@@ -1,0 +1,81 @@
+.poem-book-page { min-height: 100svh; margin: 0; padding-bottom: 0; overflow: hidden; color: #fff; background: #06172e; }
+.poem-toolbar { position: fixed; z-index: 10; top: 0; right: 0; left: 0; min-height: 92px; display: grid; grid-template-columns: 180px minmax(0, 1fr) 180px; align-items: center; padding: 0 42px; color: #fff; background: rgba(3, 13, 26, 0.48); border-bottom: 1px solid rgba(255,255,255,0.18); }
+.poem-toolbar h1 { grid-column: 2; margin: 0; color: #fff; font: 600 24px/1.2 "KaiTi", "STKaiti", "楷体", serif; text-align: center; }
+.poem-book-page a.poem-back { min-height: 42px; display: inline-flex; align-items: center; justify-self: start; gap: 9px; color: #fff !important; font-size: 12px; font-weight: 800; text-decoration: none !important; }
+.poem-back svg { width: 18px; transition: transform 160ms ease; }
+.poem-back:hover svg, .poem-back:focus-visible svg { transform: translateX(-4px); }
+.poem-book { position: relative; width: 100%; height: 100svh; overflow: hidden; }
+.poem-sheet { position: absolute; inset: 0; visibility: hidden; opacity: 0; transform: translateX(28px); transition: opacity 520ms ease, transform 520ms ease, visibility 520ms; }
+.poem-sheet.is-active { visibility: visible; opacity: 1; transform: translateX(0); }
+.poem-backdrop, .poem-shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.poem-backdrop { display: block; object-fit: cover; object-position: center 42%; }
+.poem-shade { background: rgba(3, 13, 26, 0.54); }
+.poem-copy { position: relative; z-index: 2; width: min(1180px, calc(100% - 96px)); height: 100%; display: flex; flex-direction: column; justify-content: center; margin: 0 auto; padding: 112px 0 72px; }
+.poem-number { margin: 0 0 20px; color: #f0c38c; font: 600 13px/1.2 "KaiTi", "STKaiti", "楷体", serif; }
+.poem-copy blockquote { max-width: 100%; margin: 0; font: 400 30px/2.15 "KaiTi", "STKaiti", "楷体", serif; text-shadow: 0 2px 18px rgba(0,0,0,0.48); }
+.poem-copy blockquote p { margin: 0; }
+.poem-copy blockquote p + p { margin-top: 18px; }
+.poem-copy blockquote span { white-space: nowrap; }
+.poem-right .poem-copy { align-items: flex-end; text-align: right; }
+.poem-center .poem-copy { align-items: center; text-align: center; }
+.poem-warm .poem-backdrop { filter: saturate(1.08) contrast(1.03); }
+.poem-warm .poem-shade { background: rgba(19, 13, 20, 0.5); }
+.poem-rain .poem-backdrop { filter: saturate(0.66) brightness(0.75) contrast(1.08); }
+.poem-rain .poem-shade { background: rgba(4, 20, 34, 0.57); }
+.poem-autumn .poem-backdrop { filter: saturate(0.84) brightness(0.75); }
+.poem-cool .poem-backdrop { filter: saturate(0.5) brightness(0.68) contrast(1.08); }
+.poem-cool .poem-shade { background: rgba(8, 20, 37, 0.64); }
+.poem-night .poem-backdrop, .poem-lights .poem-backdrop { filter: saturate(0.82) brightness(0.66); }
+.poem-sky .poem-backdrop { filter: saturate(0.72) brightness(0.72); }
+.poem-spring .poem-backdrop { filter: saturate(0.9) brightness(0.7); }
+.poem-memory .poem-backdrop { filter: saturate(0.62) brightness(0.68); }
+.poem-couplets { width: min(560px, 100%); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 54px; row-gap: 5px; }
+.poem-copy .poem-couplets p, .poem-copy .poem-couplets p + p { margin: 0; }
+.poem-short-lines .poem-copy blockquote { font-size: 28px; line-height: 1.9; }
+.poem-meta { display: flex; align-items: start; gap: 22px; margin-bottom: 22px; }
+.poem-meta .poem-number { min-width: 28px; margin: 7px 0 0; }
+.poem-meta h2, .poem-meta > div > p { margin: 0; font-family: "KaiTi", "STKaiti", "楷体", serif; }
+.poem-meta h2 { color: #fff; font-size: 30px; line-height: 1.2; }
+.poem-meta > div > p { margin-top: 7px; color: rgba(255,255,255,0.68); font-size: 12px; }
+.poem-long { overflow-y: auto; }
+.poem-long .poem-copy { height: auto; min-height: 100%; justify-content: flex-start; padding-top: 126px; }
+.poem-long .poem-copy blockquote { font-size: 23px; line-height: 1.6; }
+.poem-long .poem-copy blockquote p + p { margin-top: 4px; }
+.poem-page-status { position: fixed; z-index: 10; right: 42px; bottom: 34px; display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.72); font: 700 11px/1 "Segoe UI", sans-serif; }
+.poem-page-status span:first-child { color: #fff; font-size: 16px; }
+.poem-pagination { position: fixed; z-index: 10; right: 112px; bottom: 22px; display: flex; gap: 8px; }
+.poem-pagination[hidden] { display: none; }
+.poem-pagination button { width: 42px; height: 42px; display: grid; place-items: center; padding: 0; color: #fff; background: rgba(3,13,26,0.62); border: 1px solid rgba(255,255,255,0.28); border-radius: 50%; cursor: pointer; }
+.poem-pagination button:hover { color: #06172e; background: #fff; }
+.poem-pagination button:active { transform: scale(0.94); }
+.poem-pagination button:disabled { cursor: default; opacity: 0.36; }
+.poem-pagination svg { width: 18px; }
+
+@media (max-width: 640px) {
+  .poem-toolbar { min-height: 74px; grid-template-columns: auto minmax(0, 1fr); gap: 16px; padding: 0 18px; }
+  .poem-toolbar h1 { grid-column: 2; font-size: 19px; text-align: right; }
+  .poem-back { min-width: 42px; }
+  .poem-back span { display: none; }
+  .poem-backdrop { object-position: 63% center; }
+  .poem-shade { background: rgba(3, 13, 26, 0.6); }
+  .poem-copy { width: calc(100% - 40px); align-items: flex-start; padding: 92px 0 86px; }
+  .poem-right .poem-copy { align-items: flex-end; }
+  .poem-center .poem-copy { align-items: center; }
+  .poem-number { margin-bottom: 18px; }
+  .poem-copy blockquote { font-size: 21px; line-height: 1.95; }
+  .poem-copy blockquote p + p { margin-top: 24px; }
+  .poem-copy blockquote span { display: block; white-space: normal; }
+  .poem-couplets { grid-template-columns: 1fr; row-gap: 0; }
+  .poem-short-lines .poem-copy blockquote { font-size: 20px; line-height: 1.75; }
+  .poem-meta { gap: 14px; margin-bottom: 18px; }
+  .poem-meta h2 { font-size: 25px; }
+  .poem-long .poem-copy { padding-top: 94px; padding-bottom: 90px; }
+  .poem-long .poem-copy blockquote { font-size: 17px; line-height: 1.72; }
+  .poem-long .poem-copy blockquote p + p { margin-top: 5px; }
+  .poem-page-status { right: 20px; bottom: 24px; }
+  .poem-pagination { right: auto; bottom: 14px; left: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poem-sheet { transition: none; }
+}
