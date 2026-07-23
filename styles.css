@@ -367,13 +367,18 @@ main { overflow: hidden; }
 .undergraduate-heading { margin-bottom: 24px; }
 .undergraduate-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 24px; margin-bottom: 22px; }
 .undergraduate-toolbar > p { margin: 0; color: var(--muted); font-size: 12px; }
-.college-major-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
-.college-major-item { min-width: 0; display: grid; grid-template-columns: 38px minmax(0, 1fr); align-items: start; gap: 12px; padding: 25px 18px 27px; border-bottom: 1px solid var(--line); transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease; }
-.college-major-item:hover { z-index: 1; transform: translateY(-3px); background: #f7faff; box-shadow: 0 10px 24px rgba(11,31,58,0.08); }
-.college-major-index { padding-top: 5px; color: var(--green); font: 800 10px/1 "Segoe UI", sans-serif; }
-.college-major-item h3 { margin: 0; font-size: 18px; line-height: 1.45; }
-.college-major-item ul { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0 0; padding: 0; list-style: none; }
-.college-major-item li { max-width: 100%; padding: 6px 9px; color: #294f7a; background: #e5eef8; border-radius: 3px; font-size: 11px; line-height: 1.45; overflow-wrap: anywhere; }
+.college-major-list { display: grid; grid-template-columns: repeat(60, minmax(0, 1fr)); gap: 12px; padding-top: 14px; border-top: 2px solid var(--ink); }
+.college-major-item { min-width: 0; display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: start; gap: 8px; padding: 18px 14px 20px; background: #fff; border: 1px solid var(--line); border-radius: 5px; transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease; }
+.college-major-item:nth-child(-n + 3), .college-major-item:nth-child(n + 8):nth-child(-n + 10) { grid-column: span 20; }
+.college-major-item:nth-child(n + 4):nth-child(-n + 7), .college-major-item:nth-child(n + 11):nth-child(-n + 14) { grid-column: span 15; }
+.college-major-item:nth-child(n + 15) { grid-column: span 12; }
+.college-major-list.is-filtered { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.college-major-list.is-filtered .college-major-item { grid-column: auto; }
+.college-major-item:hover { z-index: 1; transform: translateY(-4px); background: #f7faff; border-color: #b8cadc; box-shadow: 0 12px 26px rgba(11,31,58,0.09); }
+.college-major-index { padding-top: 4px; color: var(--green); font: 800 10px/1 "Segoe UI", sans-serif; }
+.college-major-item h3 { margin: 0; font-size: 15px; line-height: 1.5; }
+.college-major-item ul { display: flex; flex-wrap: wrap; gap: 6px; margin: 13px 0 0; padding: 0; list-style: none; }
+.college-major-item li { max-width: 100%; padding: 5px 7px; color: #294f7a; background: #e5eef8; border-radius: 3px; font-size: 10px; line-height: 1.45; overflow-wrap: anywhere; }
 .college-major-item[hidden] { display: none; }
 .undergraduate-empty { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
 .undergraduate-source { margin: 20px 0 0; color: var(--muted); font-size: 11px; line-height: 1.75; }
@@ -488,6 +493,8 @@ footer .footer-note { font-size: 11px; opacity: 0.82; }
   .food-grid { grid-template-columns: repeat(2, 1fr); }
   .food-card:not(:nth-child(3n + 1)) { border-left: 0; }
   .food-card:nth-child(even) { border-left: 1px solid var(--line); }
+  .college-major-list, .college-major-list.is-filtered { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .college-major-list > .college-major-item:nth-child(n) { grid-column: span 1; }
   .major-card-header { grid-template-columns: minmax(0, 1fr) 252px; }
   footer { padding: 0 24px; }
 }
@@ -598,9 +605,9 @@ footer .footer-note { font-size: 11px; opacity: 0.82; }
   .major-notice { grid-template-columns: 20px 1fr; padding: 18px; }
   .undergraduate-catalog { padding-bottom: 58px; }
   .undergraduate-toolbar { grid-template-columns: 1fr; gap: 10px; }
-  .college-major-list { grid-template-columns: 1fr; }
-  .college-major-item { padding: 22px 0; }
-  .college-major-item { grid-template-columns: 30px minmax(0, 1fr); gap: 8px; }
+  .college-major-list, .college-major-list.is-filtered { grid-template-columns: 1fr; gap: 9px; }
+  .college-major-list > .college-major-item:nth-child(n) { grid-column: 1 / -1; }
+  .college-major-item { grid-template-columns: 30px minmax(0, 1fr); gap: 8px; padding: 20px 16px 22px; }
   .college-major-item h3 { font-size: 17px; }
   .college-major-item ul { margin-top: 13px; }
   .transfer-guide { padding-top: 52px; }

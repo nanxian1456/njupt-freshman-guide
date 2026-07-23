@@ -472,6 +472,8 @@ function filterUndergraduateCatalog() {
   const items = [...list.querySelectorAll(".college-major-item")];
   let visibleCount = 0;
 
+  list.classList.toggle("is-filtered", Boolean(query));
+
   items.forEach((item) => {
     const matches = !query || item.dataset.search.toLowerCase().includes(query);
     item.hidden = !matches;
