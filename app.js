@@ -464,6 +464,24 @@ function renderMajorGuides() {
   registerRevealItems(list);
 }
 
+function filterUndergraduateCatalog() {
+  const input = document.querySelector("#undergraduate-search");
+  const list = document.querySelector("#college-major-list");
+  if (!input || !list) return;
+  const query = input.value.trim().toLowerCase();
+  const items = [...list.querySelectorAll(".college-major-item")];
+  let visibleCount = 0;
+
+  items.forEach((item) => {
+    const matches = !query || item.dataset.search.toLowerCase().includes(query);
+    item.hidden = !matches;
+    if (matches) visibleCount += 1;
+  });
+
+  document.querySelector("#undergraduate-count").textContent = visibleCount;
+  document.querySelector("#undergraduate-empty").hidden = visibleCount !== 0;
+}
+
 function updateRunStatus() {
   const statusElement = document.querySelector("#run-status");
   const progressElement = document.querySelector("#timeline-progress");
@@ -541,4 +559,5 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#competition-department")?.addEventListener("change", () => { visibleCompetitionCount = 20; renderCompetitionCatalog(); });
   document.querySelector("#load-more-competitions")?.addEventListener("click", () => { visibleCompetitionCount += 20; renderCompetitionCatalog(); });
   document.querySelector("#major-search")?.addEventListener("input", renderMajorGuides);
+  document.querySelector("#undergraduate-search")?.addEventListener("input", filterUndergraduateCatalog);
 });

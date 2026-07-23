@@ -362,7 +362,24 @@ main { overflow: hidden; }
 .food-update-badge { display: inline-flex; align-items: center; min-height: 26px; margin-top: 12px; padding: 0 8px; color: #fff; background: var(--coral); border-radius: 3px; font-size: 10px; font-weight: 800; }
 .food-note { margin: 28px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
 
-.major-page { padding-top: 28px; }
+.major-page { padding-top: 42px; }
+.undergraduate-catalog { padding-bottom: 78px; }
+.undergraduate-heading { margin-bottom: 24px; }
+.undergraduate-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 24px; margin-bottom: 22px; }
+.undergraduate-toolbar > p { margin: 0; color: var(--muted); font-size: 12px; }
+.college-major-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
+.college-major-item { min-width: 0; display: grid; grid-template-columns: 38px minmax(0, 1fr); align-items: start; gap: 12px; padding: 25px 18px 27px; border-bottom: 1px solid var(--line); transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease; }
+.college-major-item:hover { z-index: 1; transform: translateY(-3px); background: #f7faff; box-shadow: 0 10px 24px rgba(11,31,58,0.08); }
+.college-major-index { padding-top: 5px; color: var(--green); font: 800 10px/1 "Segoe UI", sans-serif; }
+.college-major-item h3 { margin: 0; font-size: 18px; line-height: 1.45; }
+.college-major-item ul { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0 0; padding: 0; list-style: none; }
+.college-major-item li { max-width: 100%; padding: 6px 9px; color: #294f7a; background: #e5eef8; border-radius: 3px; font-size: 11px; line-height: 1.45; overflow-wrap: anywhere; }
+.college-major-item[hidden] { display: none; }
+.undergraduate-empty { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
+.undergraduate-source { margin: 20px 0 0; color: var(--muted); font-size: 11px; line-height: 1.75; }
+.undergraduate-source a { color: var(--green-dark); font-weight: 800; }
+.transfer-guide { padding-top: 72px; border-top: 2px solid var(--ink); }
+.transfer-heading { margin-bottom: 24px; }
 .major-notice { min-height: 92px; display: grid; grid-template-columns: 24px 1fr; align-items: center; gap: 18px; padding: 20px 24px; color: #dce8f4; background: var(--ink); border-radius: 4px; }
 .major-notice > svg { width: 22px; color: #8fc5f4; }
 .major-notice strong { display: block; margin-bottom: 4px; color: #fff; font-size: 14px; }
@@ -579,6 +596,14 @@ footer .footer-note { font-size: 11px; opacity: 0.82; }
   .food-card h2 { margin: 22px 0 9px; font-size: 20px; }
   .food-card small { top: 24px; right: 0; }
   .major-notice { grid-template-columns: 20px 1fr; padding: 18px; }
+  .undergraduate-catalog { padding-bottom: 58px; }
+  .undergraduate-toolbar { grid-template-columns: 1fr; gap: 10px; }
+  .college-major-list { grid-template-columns: 1fr; }
+  .college-major-item { padding: 22px 0; }
+  .college-major-item { grid-template-columns: 30px minmax(0, 1fr); gap: 8px; }
+  .college-major-item h3 { font-size: 17px; }
+  .college-major-item ul { margin-top: 13px; }
+  .transfer-guide { padding-top: 52px; }
   .major-stats { grid-template-columns: repeat(2, 1fr); }
   .major-stats > div + div { border-left: 0; }
   .major-stats > div:nth-child(even) { border-left: 1px solid var(--line); }
