@@ -32,6 +32,9 @@
 .poem-couplets { width: min(560px, 100%); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 54px; row-gap: 5px; }
 .poem-copy .poem-couplets p, .poem-copy .poem-couplets p + p { margin: 0; }
 .poem-short-lines .poem-copy blockquote { font-size: 28px; line-height: 1.9; }
+.poem-joined .poem-copy blockquote { width: min(840px, 100%); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 76px; text-align: left; }
+.poem-joined .poem-stanza { display: grid; gap: 4px; }
+.poem-joined .poem-copy blockquote p, .poem-joined .poem-stanza p + p { margin: 0; }
 .poem-meta { display: flex; align-items: start; gap: 22px; margin-bottom: 22px; }
 .poem-meta .poem-number { min-width: 28px; margin: 7px 0 0; }
 .poem-meta h2, .poem-meta > div > p { margin: 0; font-family: "KaiTi", "STKaiti", "楷体", serif; }
@@ -67,6 +70,8 @@
   .poem-copy blockquote span { display: block; white-space: normal; }
   .poem-couplets { grid-template-columns: 1fr; row-gap: 0; }
   .poem-short-lines .poem-copy blockquote { font-size: 20px; line-height: 1.75; }
+  .poem-joined .poem-copy blockquote { grid-template-columns: 1fr; gap: 22px; }
+  .poem-joined .poem-stanza { gap: 0; }
   .poem-meta { gap: 14px; margin-bottom: 18px; }
   .poem-meta h2 { font-size: 25px; }
   .poem-long .poem-copy { padding-top: 94px; padding-bottom: 90px; }
