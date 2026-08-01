@@ -1007,6 +1007,126 @@ h1, h2, h3, h4 { letter-spacing: 0; }
   .food-grid-sanpailou { grid-template-columns: 1fr; }
 }
 
+/* Compact module entrances and touch-first controls. */
+.module-links .module-link,
+.module-links .module-link:nth-child(even),
+.module-links .module-link:not(:nth-child(4n + 1)) {
+  min-height: 136px;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 18px;
+  grid-template-rows: 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px;
+  color: var(--ink) !important;
+  background: #fff !important;
+  background-image: none !important;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 5px 5px 0 #c9d9e9;
+}
+.module-links .module-link::before { display: none; }
+.module-links .module-link > * { position: static; z-index: auto; }
+.module-links .module-number,
+.module-links .module-group,
+.module-links .module-link p { display: none; }
+.module-links .module-link > svg:nth-child(2) {
+  grid-column: 1;
+  grid-row: 1;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  color: var(--green-dark) !important;
+  background: #e5f0fb;
+  border-radius: 14px;
+  transform: none;
+}
+.module-links .module-link[data-group="life"] > svg:nth-child(2) { color: #fff !important; background: var(--green); }
+.module-links .module-link[data-group="growth"] > svg:nth-child(2) { color: #fff !important; background: var(--coral); }
+.module-links .module-link.module-link-map > svg:nth-child(2) { color: var(--ink) !important; background: var(--yellow); }
+.module-links .module-link > div {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  min-width: 0;
+}
+.module-links .module-link h3 {
+  margin: 0;
+  color: var(--ink) !important;
+  font-size: 16px;
+  line-height: 1.35;
+}
+.module-links .module-link > svg:last-child {
+  grid-column: 3;
+  grid-row: 1;
+  width: 17px;
+  color: var(--muted) !important;
+}
+.module-links .module-link:hover > svg:nth-child(2) { transform: scale(1.06); }
+.module-links .module-link:hover > svg:last-child { transform: translate(2px, -2px); }
+
+[data-campus-key],
+.filter-button,
+.secondary-button,
+.primary-comment-button,
+.comment-more,
+.admin-refresh-button,
+.admin-token-form button,
+.admin-view-tabs button,
+.admin-comment-actions button,
+.admin-catalog-card > footer button,
+.admin-confirm-actions button { min-height: 44px; }
+
+.page-section,
+.module-hero,
+.page-context-inner,
+.section-heading > *,
+.content-heading > * { min-width: 0; }
+
+@media (max-width: 640px) {
+  body { overflow-x: hidden; }
+  .module-directory { padding-inline: 20px; }
+  .module-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .module-links .module-link,
+  .module-links .module-link:nth-child(even),
+  .module-links .module-link:not(:nth-child(4n + 1)) {
+    min-height: 112px;
+    grid-template-columns: 34px minmax(0, 1fr) 14px;
+    gap: 9px;
+    padding: 13px 10px;
+    box-shadow: 3px 3px 0 #c9d9e9;
+  }
+  .module-links .module-link > svg:nth-child(2) {
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    border-radius: 10px;
+  }
+  .module-links .module-link h3 { font-size: 14px; line-height: 1.35; }
+  .module-links .module-link > svg:last-child { width: 14px; }
+  .module-links .module-link:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--yellow); }
+  .page-section { padding-inline: 20px; }
+  .module-hero { padding-inline: 20px; }
+  .club-tools,
+  .competition-tools,
+  .undergraduate-toolbar,
+  .major-toolbar { min-width: 0; }
+  .search-box,
+  .select-box,
+  .comment-select-wrap { min-width: 0; }
+  .list-footer { align-items: stretch; flex-direction: column; }
+  .list-footer .secondary-button { width: 100%; }
+  .campus-switcher { width: 100%; }
+  .campus-switcher button { min-height: 46px; }
+  .filter-button { min-height: 44px; }
+  .travel-source-links a,
+  .dorm-source-links a,
+  .official-links a { min-height: 52px; }
+  .gallery-item { min-height: 0; }
+  .admin-token-form button { width: 100%; }
+  .admin-view-tabs button { min-height: 54px; }
+}
+
 /* Moderated anonymous comments */
 .community-comments { position: relative; margin-top: 78px; padding-top: 66px; border-top: 2px solid var(--ink); }
 .comment-heading { margin-bottom: 32px; }
