@@ -672,6 +672,10 @@ h1, h2, h3, h4 { letter-spacing: 0; }
 .guide-primary-nav a + a { border-left: 1px solid var(--line); }
 .guide-primary-nav a:hover, .guide-primary-nav a:focus-visible, .guide-primary-nav a.active { color: var(--green-dark); background: #e8f1fb; }
 .guide-primary-nav small { color: var(--muted); font: 700 10px/1 "Segoe UI", sans-serif; }
+.guide-primary-nav .guide-about-tab { min-width: 188px; justify-content: center; gap: 9px; color: var(--ink); background: #dceaf8; border-color: #a9c8e5; }
+.guide-primary-nav .guide-about-tab:hover, .guide-primary-nav .guide-about-tab:focus-visible, .guide-primary-nav .guide-about-tab.active { color: var(--ink); background: #c6dcf2; }
+.guide-primary-nav .guide-about-tab small { color: #3b6289; }
+.guide-primary-nav .guide-about-tab svg { width: 16px; height: 16px; }
 .header-tools { justify-self: end; }
 .guide-search-trigger { min-width: 88px; height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; color: #fff; background: var(--ink); border: 1px solid var(--ink); border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 800; transition: transform 120ms ease, background-color 160ms ease; }
 .guide-search-trigger:hover { background: var(--green-dark); }
@@ -789,7 +793,7 @@ h1, h2, h3, h4 { letter-spacing: 0; }
 
 @media (max-width: 900px) {
   .site-header { grid-template-columns: 1fr auto; gap: 18px; }
-  .guide-primary-nav { display: none; }
+  .guide-primary-nav { justify-self: end; }
   .main-nav.is-open { max-height: calc(100vh - 24px); overflow-x: hidden; overflow-y: auto; }
   .main-nav.is-open a { min-width: 56px; }
   .welcome-hero { min-height: 650px; }
@@ -806,6 +810,8 @@ h1, h2, h3, h4 { letter-spacing: 0; }
 
 @media (max-width: 640px) {
   .site-header { padding-inline: 18px; }
+  .guide-primary-nav { height: 40px; }
+  .guide-primary-nav .guide-about-tab { min-width: 148px; padding-inline: 10px; font-size: 12px; }
   .guide-search-trigger { min-width: 42px; width: 42px; padding: 0; border-radius: 50%; }
   .guide-search-trigger span { display: none; }
   .main-nav.is-open { width: 98px; align-items: stretch; }
