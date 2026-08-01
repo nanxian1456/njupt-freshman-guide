@@ -95,8 +95,15 @@ function initSiteGuide() {
   const primaryNav = document.createElement("nav");
   primaryNav.className = "guide-primary-nav";
   primaryNav.setAttribute("aria-label", "指南分类");
-  primaryNav.innerHTML = `<a class="guide-about-tab${currentPage === "about" ? " active" : ""}" href="about.html"${currentPage === "about" ? ' aria-current="page"' : ""}><i data-lucide="info"></i><span>关于本站</span><small>ABOUT</small><i data-lucide="arrow-up-right"></i></a>`;
+  primaryNav.innerHTML = Object.entries(GUIDE_GROUPS).map(([key, group]) =>
+    `<a href="index.html#${key}"><span>${group.label}</span><small>${String(group.pages.length).padStart(2, "0")}</small></a>`
+  ).join("") + `<a class="guide-about-tab${currentPage === "about" ? " active" : ""}" href="about.html"${currentPage === "about" ? ' aria-current="page"' : ""}><span>关于本站</span><small>ABOUT</small></a>`;
   header.insertBefore(primaryNav, mainNav);
+
+  const headerTools = document.createElement("div");
+  headerTools.className = "header-tools";
+  headerTools.innerHTML = '<button class="guide-search-trigger" type="button" aria-label="搜索指南"><i data-lucide="search"></i><span>搜索</span></button>';
+  header.insertBefore(headerTools, mainNav);
 
   const searchDialog = document.createElement("dialog");
   searchDialog.className = "guide-search-dialog";
@@ -126,6 +133,7 @@ function initSiteGuide() {
     searchEmpty.hidden = true;
     window.requestAnimationFrame(() => searchInput.focus());
   };
+  headerTools.querySelector("button").addEventListener("click", openSearch);
   searchDialog.querySelector(".guide-search-close").addEventListener("click", () => searchDialog.close());
   searchDialog.addEventListener("click", (event) => { if (event.target === searchDialog) searchDialog.close(); });
   searchInput.addEventListener("input", () => {
